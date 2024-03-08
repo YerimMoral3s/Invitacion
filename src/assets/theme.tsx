@@ -1,4 +1,6 @@
 export const colors = {
+  champania: '#f7e7ce',
+  teja: '#c37349',
   // colors sonia 3 main colors
   lightBlue: 'rgb(100, 134, 151)',
   blue: 'rgb(47, 79,104)',

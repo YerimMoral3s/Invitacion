@@ -59,8 +59,6 @@ const StyledNames = styled.div`
   }
 `;
 
-// Ahora puedes usar StyledNames en tu componente React
-
 const Names = () => {
   const nameContainerTop = useRef<HTMLDivElement>(null);
   const nameContainerBottom = useRef<HTMLDivElement>(null);
@@ -86,7 +84,6 @@ const Names = () => {
       maskBottom.current.style.height = `${maskHeight}px`;
 
       for (let i = -100; i < distance; i++) {
-        console.log(i);
         setTimeout(() => {
           if (nameContainerTop.current && nameContainerBottom.current) {
             nameContainerTop.current.style.top = `${i}px`;

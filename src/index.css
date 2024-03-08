@@ -46,6 +46,28 @@
   font-weight: 700;
   font-style: italic;
 }
+/* font extra light */
+@font-face {
+  font-family: 'jakarta-extra-light';
+  src: url('./assets/Plus_Jakarta_Sans/static/PlusJakartaSans-ExtraLight.ttf')
+    format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 html {
   font-size: 16px;

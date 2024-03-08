@@ -1,9 +1,8 @@
-import React, {
+import {
   CSSProperties,
   forwardRef,
   HTMLAttributes,
   ForwardRefRenderFunction,
-  RefObject,
 } from 'react';
 import styled from 'styled-components';
 
@@ -18,7 +17,7 @@ const StyledText = styled.div<{ style?: CSSProperties }>`
 `;
 
 const Text: ForwardRefRenderFunction<HTMLDivElement, TextProps> = (
-  { text, style, as: Element = 'div', ...rest },
+  { text, style, as: Element = 'p', ...rest },
   ref,
 ) => {
   return (

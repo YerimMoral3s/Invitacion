@@ -4,102 +4,95 @@ import { useEffect, useRef } from 'react';
 import Text from '../components/Text';
 import { colors } from '../assets/theme';
 
+const COMPONENT_HEIGHT = 500;
+const NAMES = 'IRVIN & SONIA';
+
 const StyledNames = styled.div`
   display: flex;
   gap: 10px;
   height: 100vh;
-  background-color: ${colors.lightGrey};
+  background-color: ${colors.champania};
 
   .container {
     margin: auto;
 
-    height: 500px;
+    height: ${COMPONENT_HEIGHT}px;
     width: 100%;
     position: relative;
 
-    // background-color: pink;
-
     .names-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: absolute;
       width: 100%;
 
-      .namesSubContainer {
-        overflow: hidden;
+      text-align: center;
 
+      .mask {
+        overflow: hidden;
         .names {
           line-height: 1;
           font-family: jakarta-extra-light;
-          color: ${colors.darkGrey};
+          color: ${colors.teja};
+          font-size: 5rem;
         }
       }
     }
 
-    .names-container-1 {
-      position: absolute;
-      background-color: yellow;
-      // animation: alignTextFromTop2Center 1.2s ease-in-out forwards;
+    .names-container-top {
+      top: -100px;
     }
 
-    .names-container-2 {
-      background-color: green;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      // animation: alignTextFromTop2Bottom 1.2s ease-in-out forwards;
+    .names-container-bottom {
+      bottom: -100px;
     }
   }
 
-  // @keyframes alignTextFromTop2Center {
-  //   0% {
-  //     top: -20%;
-  //   }
-  //   100% {
-  //     top: 40%;
-  //   }
-  // }
-
-  // @keyframes alignTextFromTop2Bottom {
-  //   0% {
-  //     bottom: -20%;
-  //   }
-  //   100% {
-  //     bottom: 41%;
-  //   }
-  // }
+  @media (max-width: 768px) {
+    .container {
+      .names-container {
+        .mask {
+          .names {
+            font-size: 2.5rem;
+          }
+        }
+      }
+    }
+  }
 `;
 
 // Ahora puedes usar StyledNames en tu componente React
 
 const Names = () => {
-  const namesSubContainer = useRef<HTMLDivElement>(null);
-  const namesSubContainer2 = useRef<HTMLDivElement>(null);
+  const nameContainerTop = useRef<HTMLDivElement>(null);
+  const nameContainerBottom = useRef<HTMLDivElement>(null);
+
+  const maskTop = useRef<HTMLDivElement>(null);
+  const maskBottom = useRef<HTMLDivElement>(null);
+
   const textRef = useRef<HTMLDivElement>(null);
-  const half = 250;
 
   useEffect(() => {
     if (
-      namesSubContainer.current &&
-      namesSubContainer2.current &&
-      textRef.current
+      nameContainerTop.current &&
+      textRef.current &&
+      maskTop.current &&
+      maskBottom.current
     ) {
       const { height } = textRef.current.getBoundingClientRect();
-      const containerHeight = height / 1.6;
-      namesSubContainer.current.style.height = `${containerHeight}px`;
-      namesSubContainer2.current.style.height = `${containerHeight}px`;
+      const maskHeight = height / 2;
 
-      namesSubContainer.current.style.position = 'absolute';
-      namesSubContainer2.current.style.position = 'absolute';
+      const distance = COMPONENT_HEIGHT / 2 - height / 2;
 
-      for (let i = 0; i < half - height / 1.85; i++) {
+      maskTop.current.style.height = `${maskHeight}px`;
+      maskBottom.current.style.height = `${maskHeight}px`;
+
+      for (let i = -100; i < distance; i++) {
+        console.log(i);
         setTimeout(() => {
-          if (namesSubContainer.current && namesSubContainer2.current) {
-            namesSubContainer.current.style.top = `${i}px`;
-            namesSubContainer2.current.style.bottom = `${i}px`;
+          if (nameContainerTop.current && nameContainerBottom.current) {
+            nameContainerTop.current.style.top = `${i}px`;
+            nameContainerBottom.current.style.bottom = `${i + 2}px`;
           }
-        }, i * 4);
+        }, i * 7);
       }
     }
   }, []);
@@ -108,27 +101,23 @@ const Names = () => {
     <StyledNames>
       <div className="container">
         <div
-          className="names-container names-container-1"
-          style={{ top: '-20%' }}
+          className="names-container names-container-top"
+          ref={nameContainerTop}
         >
-          <div className="namesSubContainer" ref={namesSubContainer}>
+          <div className="mask mask-top" ref={maskTop}>
             <Text
               ref={textRef}
               as="h1"
-              text="IRVIN Y SONIA"
+              text={NAMES}
               className="names fade-in "
             />
           </div>
         </div>
-        <div className="names-container names-container-2">
-          <div
-            className="namesSubContainer"
-            ref={namesSubContainer2}
-            style={{
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
+        <div
+          className="names-container names-container-bottom"
+          ref={nameContainerBottom}
+        >
+          <div className="mask mask-bottom" ref={maskBottom}>
             <div
               style={{
                 position: 'relative',
@@ -137,13 +126,13 @@ const Names = () => {
             >
               <Text
                 as="h1"
-                text="IRVIN Y SONIA"
+                text={NAMES}
                 className="names fade-in "
                 style={{
                   height: '100%',
                   width: '100%',
                   position: 'absolute',
-                  top: 'calc(-50% - 6.2px)',
+                  bottom: '100%',
                 }}
               />
             </div>

@@ -141,6 +141,15 @@ const Names = () => {
           </div>
         </div>
       </StyledNames>
+      <div
+        className="hidden-view"
+        style={{
+          width: '100%',
+          height: '100vh',
+          zIndex: -1,
+          // mouseEvents: 'none',
+        }}
+      ></div>
     </>
   );
 };

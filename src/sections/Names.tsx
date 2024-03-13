@@ -8,13 +8,13 @@ const COMPONENT_HEIGHT = 500;
 const NAMES = 'IRVIN & SONIA';
 
 const StyledNames = styled.div`
+  position: absolute;
   display: flex;
   gap: 10px;
   height: 100vh;
+  width: 100vw;
   background-color: ${colors.champania};
-
-  position: relative;
-  z-index: 2;
+  z-index: 100;
 
   .container {
     margin: auto;
@@ -141,15 +141,6 @@ const Names = () => {
           </div>
         </div>
       </StyledNames>
-      <div
-        className="hidden-view"
-        style={{
-          width: '100%',
-          height: '100vh',
-          zIndex: -1,
-          // mouseEvents: 'none',
-        }}
-      ></div>
     </>
   );
 };

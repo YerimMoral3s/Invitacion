@@ -1,12 +1,15 @@
+import Logo from './components/Logo';
+import LogoContainer from './sections/LogoContainer';
 import Names from './sections/Names';
 import PhotosAnimation from './sections/PhotosAnimation';
 
 function App() {
   return (
     <>
-      <Names />
+      <LogoContainer />
+      {/* <Logo /> */}
       <PhotosAnimation />
-      <div
+      {/* <div
         className="cont"
         style={{
           height: '100px',
@@ -115,7 +118,7 @@ function App() {
         }}
       >
         <h1>Hola</h1>
-      </div>
+      </div> */}
     </>
   );
 }

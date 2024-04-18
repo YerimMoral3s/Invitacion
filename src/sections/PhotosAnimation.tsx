@@ -16,7 +16,7 @@ const StyledPhotosAnimation = styled.div<styledProps>`
   position: static;
   top: 0px;
   height: 280vh;
-  background-color: ${colors.champania};
+  background-color: ${colors.green};
 
   .proposal-img {
     width: 100%;
@@ -37,7 +37,7 @@ const StyledPhotosAnimation = styled.div<styledProps>`
 
 export default function PhotosAnimation() {
   const { scroll } = useScroll();
-  const imageRef = useRef(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const curtain = document.querySelector('.curtain');
@@ -75,10 +75,8 @@ export default function PhotosAnimation() {
   }, [scroll]);
 
   return (
-    <>
-      <StyledPhotosAnimation show={scroll > 50 ? 'true' : 'false'}>
-        <img ref={imageRef} className="proposal-img" alt="proposal" />
-      </StyledPhotosAnimation>
-    </>
+    <StyledPhotosAnimation show={scroll > 50 ? 'true' : 'false'}>
+      <img ref={imageRef} className="proposal-img" alt="proposal" src={img1} />
+    </StyledPhotosAnimation>
   );
 }

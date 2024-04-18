@@ -13,7 +13,7 @@ const StyledNames = styled.div`
   gap: 10px;
   height: 100vh;
   width: 100vw;
-  background-color: ${colors.champania};
+  background-color: ${colors.black};
   z-index: 100;
 
   .container {
@@ -34,7 +34,7 @@ const StyledNames = styled.div`
         .names {
           line-height: 1;
           font-family: jakarta-extra-light;
-          color: ${colors.teja};
+          color: ${colors.white};
           font-size: 5rem;
         }
       }
@@ -98,50 +98,48 @@ const Names = () => {
   }, []);
 
   return (
-    <>
-      <StyledNames className="curtain">
-        <div className="container">
-          <div
-            className="names-container names-container-top"
-            ref={nameContainerTop}
-          >
-            <div className="mask mask-top" ref={maskTop}>
+    <StyledNames className="curtain">
+      <div className="container">
+        <div
+          className="names-container names-container-top"
+          ref={nameContainerTop}
+        >
+          <div className="mask mask-top" ref={maskTop}>
+            <Text
+              ref={textRef}
+              as="h1"
+              text={NAMES}
+              className="names fade-in "
+            />
+          </div>
+        </div>
+        <div
+          className="names-container names-container-bottom"
+          ref={nameContainerBottom}
+        >
+          <div className="mask mask-bottom" ref={maskBottom}>
+            <div
+              style={{
+                position: 'relative',
+                height: '100%',
+              }}
+            >
               <Text
-                ref={textRef}
                 as="h1"
                 text={NAMES}
                 className="names fade-in "
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  bottom: '100%',
+                }}
               />
             </div>
           </div>
-          <div
-            className="names-container names-container-bottom"
-            ref={nameContainerBottom}
-          >
-            <div className="mask mask-bottom" ref={maskBottom}>
-              <div
-                style={{
-                  position: 'relative',
-                  height: '100%',
-                }}
-              >
-                <Text
-                  as="h1"
-                  text={NAMES}
-                  className="names fade-in "
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    position: 'absolute',
-                    bottom: '100%',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
         </div>
-      </StyledNames>
-    </>
+      </div>
+    </StyledNames>
   );
 };
 

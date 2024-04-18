@@ -1,15 +1,15 @@
 export const colors = {
-  champania: '#f7e7ce',
-  teja: '#c37349',
-  // colors sonia 3 main colors
-  lightBlue: 'rgb(100, 134, 151)',
-  blue: 'rgb(47, 79,104)',
-  melon: 'rgb(122,40,21)',
-  // variant colors
-  darkBlue: 'rgb(11,39,84)',
-  bone: 'rgb(255,227,199)',
-  lightGrey: 'rgb(220,220,220)',
-  darkGrey: 'rgb(100,100,100)',
-  white: 'rgb(255,255,255)',
-  black: 'rgb(0,0,0)',
+  //   Amarillo #FCF6CA
+  // Verde #CCE2CB
+  // ROSA #F3B0C3
+  // Azul #B0D0E7
+
+  yellow: '#FCF6CA',
+  green: '#CCE2CB',
+  pink: '#F3B0C3',
+  blue: '#B0D0E7',
+  dark: '#1A1A1A',
+  light: '#F5F5F5',
+  white: '#FFFFFF',
+  black: '#000000',
 };

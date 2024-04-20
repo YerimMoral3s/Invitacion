@@ -1,13 +1,8 @@
-import Logo from './components/Logo';
-import LogoContainer from './sections/LogoContainer';
-import Names from './sections/Names';
 import PhotosAnimation from './sections/PhotosAnimation';
 
 function App() {
   return (
     <>
-      <LogoContainer />
-      {/* <Logo /> */}
       <PhotosAnimation />
       {/* <div
         className="cont"

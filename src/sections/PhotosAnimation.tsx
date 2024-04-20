@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors } from '../assets/theme';
-import useScroll from '../Utils/useScroll';
 import img1 from '../assets/images/irv-son-1.jpg';
 import img2 from '../assets/images/irv-son-2.jpg';
 import img3 from '../assets/images/irv-son-3.jpg';

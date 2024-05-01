@@ -13,36 +13,49 @@ import Logo from '../components/Logo';
 const imagesArray = [img1, img2, img3, img4, img5, img6];
 
 const StyledPhotosAnimation = styled.section`
+  position: relative;
   width: 100vw;
   height: 200vh;
 
-  .proposal-img {
-    width: 100%;
+  .static-container {
+    width: 100vw;
     height: 100vh;
-    object-fit: cover;
-
-    filter: grayscale(100%);
 
     position: sticky;
     top: 0;
-    z-index: -1;
-  }
 
-  .logo-container {
-    position: absolute;
-    top: 0;
+    .logo-container {
+      width: 100%;
+      height: 100%;
 
-    width: 100%;
-    height: 200vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    display: flex;
-    justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
 
-    z-index: 1;
+    .proposal-img-container {
+      width: 100%;
+      height: 100%;
 
-    .logo-is {
-      position: sticky;
-      top: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+      top: 0;
+
+      z-index: 0;
+
+      filter: grayscale(100%);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 `;
@@ -81,22 +94,26 @@ export default function PhotosAnimation() {
 
   return (
     <StyledPhotosAnimation>
-      <div className="logo-container">
-        <Logo
-          className="logo-is fade-in-slow"
-          width={600}
-          height={600}
-          fill={colors.white}
-          stroke={colors.white}
-        />
-      </div>
+      <div className="static-container">
+        <div className="logo-container">
+          <Logo
+            className="logo-is fade-in-slow"
+            width={600}
+            height={600}
+            fill={colors.white}
+            stroke={colors.white}
+          />
+        </div>
 
-      <img
-        ref={imageRef}
-        className="proposal-img fade-in"
-        alt={`imagen-${imagesArray[sectionRef.current]}`}
-        src={imagesArray[sectionRef.current]}
-      />
+        <div className="proposal-img-container">
+          <img
+            ref={imageRef}
+            className="proposal-img fade-in"
+            alt={`imagen-${imagesArray[sectionRef.current]}`}
+            src={imagesArray[sectionRef.current]}
+          />
+        </div>
+      </div>
     </StyledPhotosAnimation>
   );
 }

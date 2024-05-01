@@ -14,6 +14,7 @@ const imagesArray = [img1, img2, img3, img4, img5, img6];
 
 const StyledPhotosAnimation = styled.section`
   position: relative;
+  z-index: 20;
   width: 100vw;
   height: 200vh;
 

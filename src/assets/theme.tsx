@@ -12,4 +12,5 @@ export const colors = {
   light: '#F5F5F5',
   white: '#FFFFFF',
   black: '#000000',
+  gold: 'rgb(203, 175, 151)',
 };

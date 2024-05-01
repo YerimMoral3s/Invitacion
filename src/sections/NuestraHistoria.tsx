@@ -285,12 +285,9 @@ export default function NuestraHistoria() {
           <div style={{ display: 'flex' }}>
             <Text as="h1" text="Irvin" />
             <Text
-              // style={{
-              //   fontSize: '2.8rem',
-              //   color: colors.black,
-              //   margin: '0 1rem',
-              //   alignSelf: 'end',
-              // }}
+              style={{
+                margin: '0 1rem',
+              }}
               as="h1"
               text="&"
             />

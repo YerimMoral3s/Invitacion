@@ -243,28 +243,9 @@ export const StyledBoda = styled.section`
 
     background-size: 1300px;
 
-    .names {
-      h1 {
-        font-size: 7rem;
-      }
-    }
     .hex-irv-son {
       width: 500px;
       height: 500px;
-    }
-
-    .our-history {
-      h2 {
-        font-size: 3.5rem;
-      }
-
-      .text {
-        p {
-          font-size: 2rem;
-          line-height: 3rem;
-          margin: 0 0 20px 0;
-        }
-      }
     }
   }
 
@@ -275,17 +256,6 @@ export const StyledBoda = styled.section`
 
     background-size: 1700px;
     padding-bottom: 11rem;
-
-    .names {
-      h1 {
-        font-size: 8rem;
-      }
-    }
-
-    .hex-irv-son {
-      width: 550px;
-      height: 550px;
-    }
 
     .flower1-container {
       height: 600px;

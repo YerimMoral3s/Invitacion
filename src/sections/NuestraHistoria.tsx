@@ -124,7 +124,7 @@ export const StyledBoda = styled.section`
       margin: 0 auto;
       p {
         font-size: 1rem;
-        font-family: pearl-white;
+        font-family: rosarivo-italic;
         color: ${colors.black};
         line-height: 1.8rem;
         margin: 0 0 10px 0;

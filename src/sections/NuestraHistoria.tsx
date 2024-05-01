@@ -135,6 +135,7 @@ export const StyledBoda = styled.section`
   }
 
   @media (min-width: 450px) {
+    background-size: 800px;
     .flower1-container {
       height: 400px;
     }

@@ -110,10 +110,11 @@ export const StyledBoda = styled.section`
     margin: 0 auto;
 
     h2 {
+      rotate: -8deg;
       font-size: 1.8rem;
       font-family: pearl-white;
       color: ${colors.gold};
-      margin: 0 0 10px 0;
+      margin: 30px 0;
     }
 
     .text {

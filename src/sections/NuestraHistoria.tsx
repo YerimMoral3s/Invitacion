@@ -11,6 +11,7 @@ import { colors } from '../assets/theme';
 import flower1 from '../assets/images/flower1.png';
 import flower2 from '../assets/images/flower2.png';
 import cloud from '../assets/images/cloud.png';
+import SubTitle from '../components/SubTitle';
 
 export const StyledBoda = styled.section`
   width: 100vw;
@@ -109,14 +110,6 @@ export const StyledBoda = styled.section`
   .our-history {
     margin: 0 auto;
 
-    h2 {
-      rotate: -8deg;
-      font-size: 1.8rem;
-      font-family: pearl-white;
-      color: ${colors.gold};
-      margin: 30px 0;
-    }
-
     .text {
       max-width: 80%;
       display: flex;
@@ -153,10 +146,6 @@ export const StyledBoda = styled.section`
     }
 
     .our-history {
-      h2 {
-        font-size: 2rem;
-      }
-
       .text {
         p {
           font-size: 1.2rem;
@@ -180,10 +169,6 @@ export const StyledBoda = styled.section`
     }
 
     .our-history {
-      h2 {
-        font-size: 3rem;
-      }
-
       .text {
         p {
           margin: 0 0 15px 0;
@@ -208,10 +193,6 @@ export const StyledBoda = styled.section`
     }
 
     .our-history {
-      h2 {
-        font-size: 3.2rem;
-      }
-
       .text {
         p {
           font-size: 1.8rem;
@@ -299,7 +280,7 @@ export default function NuestraHistoria() {
           <img src={img} alt="Irvin y Sonia" />
         </div>
         <div className="our-history">
-          <Text as="h2" text="Nuestra Historia" />
+          <SubTitle text="Nuestra Historia" />
           <div className="text">
             <Text
               as="p"

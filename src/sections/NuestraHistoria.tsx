@@ -11,7 +11,7 @@ import { colors } from '../assets/theme';
 import flower1 from '../assets/images/flower1.png';
 import flower2 from '../assets/images/flower2.png';
 import cloud from '../assets/images/cloud.png';
-import SubTitle from '../components/SubTitle';
+import MainTitle from '../components/MainTitle';
 
 export const StyledBoda = styled.section`
   width: 100vw;
@@ -280,7 +280,7 @@ export default function NuestraHistoria() {
           <img src={img} alt="Irvin y Sonia" />
         </div>
         <div className="our-history">
-          <SubTitle text="Nuestra Historia" />
+          <MainTitle text="Nuestra Historia" />
           <div className="text">
             <Text
               as="p"

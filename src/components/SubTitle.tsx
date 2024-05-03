@@ -3,22 +3,21 @@ import styled from 'styled-components';
 import { colors } from '../assets/theme';
 
 const StyledSubTitle = styled.h2`
-  rotate: -8deg;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-family: pearl-white;
-  color: ${colors.gold};
-  margin: 30px 0;
+  color: ${colors.black};
+  margin: 10px 0;
 
   @media (min-width: 450px) {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   @media (min-width: 576px) {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   @media (min-width: 768px) {
-    font-size: 3.2rem;
+    font-size: 2.2rem;
   }
 `;
 

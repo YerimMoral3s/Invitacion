@@ -24,11 +24,11 @@ const StyledContainer = styled.div`
 
 type ContainerProps = PropsWithChildren & {
   style?: CSSProperties;
-};
+} & React.HTMLProps<HTMLDivElement>;
 
-const Container = ({ children, style }: ContainerProps) => {
+const Container = ({ children, style, ...rest }: ContainerProps) => {
   return (
-    <StyledContainer className="container" style={style}>
+    <StyledContainer className="container" style={style} {...rest}>
       {children}
     </StyledContainer>
   );

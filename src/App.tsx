@@ -10,7 +10,6 @@ import icon3 from './assets/images/brindis.png';
 import icon4 from './assets/images/IGLESIA.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
-import img from './assets/images/irv-son-14.jpg';
 
 const CivilObjects = [
   {

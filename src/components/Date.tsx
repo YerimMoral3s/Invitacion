@@ -1,4 +1,3 @@
-import React from 'react';
 import SubTitle from './SubTitle';
 import Text from './Text';
 import styled from 'styled-components';

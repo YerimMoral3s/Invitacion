@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styled from 'styled-components';
 import Container from './Container';
 import Text from './Text';

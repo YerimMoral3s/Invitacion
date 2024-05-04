@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yerimmoral3s.github.io/",
+  "homepage": "https://yerimmoral3s.github.io/invitacion",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

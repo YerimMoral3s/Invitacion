@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import cloud from '../assets/images/cloud.png';
+
 import MainTitle from '../components/MainTitle';
 import Date from '../components/Date';
 import ImageCallAction from '../components/ImageCallAction';
@@ -14,6 +16,39 @@ const StyledBody = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background:
+    url(${cloud}) no-repeat left -300px top 0px,
+    url(${cloud}) no-repeat right -300px bottom -120px;
+
+  background-size: 700px;
+
+  @media (min-width: 450px) {
+    background-size: 800px;
+  }
+
+  @media (min-width: 576px) {
+    background:
+      url(${cloud}) no-repeat left -300px top 0px,
+      url(${cloud}) no-repeat right -300px bottom -150px;
+    background-size: 900px;
+  }
+
+  @media (min-width: 768px) {
+    background-size: 1000px;
+  }
+
+  @media (min-width: 992px) {
+    background-size: 1100px;
+  }
+
+  @media (min-width: 1200px) {
+    background:
+      url(${cloud}) no-repeat left -500px top -200px,
+      url(${cloud}) no-repeat right -500px bottom -100px;
+
+    background-size: 1200px;
+  }
 
   // *{
   //   border: 1px solid red;

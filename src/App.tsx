@@ -11,7 +11,7 @@ import icon4 from './assets/images/iglesia copy.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
 
-const CivilObjects = [
+const content_list = [
   {
     name: 'MainTitle',
     text: 'Lugar y Fecha',
@@ -57,17 +57,6 @@ const CivilObjects = [
     title: 'Coctél',
     href: 'https://www.google.com/maps/dir//formal',
   },
-];
-
-const ReligiosaObjects = [
-  {
-    name: 'MainTitle',
-    text: 'Lugar y Fecha',
-    style: {
-      width: '100%',
-      textAlign: 'center',
-    },
-  },
   {
     name: 'Date',
     text: 'Ceremonia Religiosa',
@@ -105,9 +94,6 @@ const ReligiosaObjects = [
     title: 'Formal',
     href: 'https://www.google.com/maps/dir//formal',
   },
-];
-
-const GiftObjects = [
   // {
   //   name: 'Imagen',
   //   src: img,
@@ -155,9 +141,7 @@ function App() {
     <>
       <PhotosAnimation />
       <NuestraHistoria />
-      <Body InfoList={CivilObjects} />
-      <Body InfoList={ReligiosaObjects} />
-      <Body InfoList={GiftObjects} />
+      <Body InfoList={content_list} />
     </>
   );
 }

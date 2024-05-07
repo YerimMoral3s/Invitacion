@@ -9,6 +9,7 @@ const StyledSeparator = styled.div`
   background-color: ${colors.green};
   margin: 1rem 0;
   margin-bottom: 0;
+
   .dress-code-container {
     background-color: ${colors.green};
     color: ${colors.black};
@@ -18,7 +19,6 @@ const StyledSeparator = styled.div`
     a {
       color: ${colors.gold};
       text-decoration: none;
-      font-size: 1.2rem;
     }
 
     .text {
@@ -29,19 +29,21 @@ const StyledSeparator = styled.div`
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
 
-    h2 {
-      font-size: 1.5rem;
+    h2,
+    a {
+      font-size: 1.2rem;
     }
 
     @media (min-width: 768px) {
       h1 {
-        font-size: 3.5rem;
+        font-size: 5rem;
       }
 
-      h2 {
+      h2,
+      a {
         font-size: 2rem;
       }
     }

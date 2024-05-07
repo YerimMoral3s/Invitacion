@@ -12,6 +12,7 @@ import flower1 from '../assets/images/flower1.png';
 import flower2 from '../assets/images/flower2.png';
 import cloud from '../assets/images/cloud.png';
 import MainTitle from '../components/MainTitle';
+import couple_names from '../assets/images/logo_names.png';
 
 export const StyledBoda = styled.section`
   width: 100vw;
@@ -33,6 +34,11 @@ export const StyledBoda = styled.section`
     padding-bottom: 1rem;
   }
 
+  .logo-names {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
   .flower1-container {
     width: 100%;
     height: 300px;
@@ -71,25 +77,6 @@ export const StyledBoda = styled.section`
       position: absolute;
 
       right: 30%;
-    }
-  }
-
-  .names {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    // rotate: -10deg;
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 4rem;
-
-    h1 {
-      font-size: 3rem;
-      font-family: pearl-white;
-      color: ${colors.black};
     }
   }
 
@@ -134,12 +121,6 @@ export const StyledBoda = styled.section`
       height: 400px;
     }
 
-    .names {
-      h1 {
-        font-size: 4rem;
-      }
-    }
-
     .hex-irv-son {
       width: 350px;
       height: 350px;
@@ -157,11 +138,6 @@ export const StyledBoda = styled.section`
 
   @media (min-width: 576px) {
     background-size: 900px;
-    .names {
-      h1 {
-        font-size: 5rem;
-      }
-    }
 
     .hex-irv-son {
       width: 400px;
@@ -182,11 +158,7 @@ export const StyledBoda = styled.section`
   @media (min-width: 768px) {
     background-size: 1000px;
     padding-bottom: 7rem;
-    .names {
-      h1 {
-        font-size: 6rem;
-      }
-    }
+
     .hex-irv-son {
       width: 450px;
       height: 450px;
@@ -263,19 +235,7 @@ export default function NuestraHistoria() {
         <div className="flower1"></div>
       </div>
       <Container>
-        <div className="names">
-          <div style={{ display: 'flex' }}>
-            <Text as="h1" text="Irvin" />
-            <Text
-              style={{
-                margin: '0 1rem',
-              }}
-              as="h1"
-              text="&"
-            />
-          </div>
-          <Text as="h1" text="Sonia" />
-        </div>
+        <img className="logo-names" src={couple_names} alt="" />
         <div className="hex-irv-son">
           <img src={img} alt="Irvin y Sonia" />
         </div>
@@ -284,7 +244,7 @@ export default function NuestraHistoria() {
           <div className="text">
             <Text
               as="p"
-              text="A dos semanas de conocernos, decidimos ser novios y ... cremos que eso define mucho de como nunca pensamos en legar hasta aqui."
+              text="A dos semanas de conocernos, decidimos ser novios y ... cremos que eso define mucho de como nunca pensamos en llegar hasta aqui."
             />
             <Text
               as="p"

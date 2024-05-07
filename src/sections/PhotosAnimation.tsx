@@ -67,7 +67,7 @@ export default function PhotosAnimation() {
   const imageRef = useRef<HTMLImageElement | null>(null);
 
   const scroll = () => {
-    if (!imageRef.current || !imagesArray) return;
+    if (!imageRef.current) return;
     const scrollPosition = window.scrollY;
     const section = Math.floor(
       scrollPosition / (viewportHeight / imagesArray.length),

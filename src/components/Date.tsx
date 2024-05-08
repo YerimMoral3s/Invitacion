@@ -8,16 +8,6 @@ const StyledDate = styled.div`
   width: 100%;
   text-align: center;
 
-  background: url(${icon}) no-repeat right -120px top -45px;
-  background-size: 230px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  .container {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
   .date-container {
     display: flex;
     justify-content: center;
@@ -45,25 +35,70 @@ const StyledDate = styled.div`
     }
   }
 
+  .date-icon {
+    background: url(${icon}) no-repeat center right -20%;
+    background-size: 150px;
+
+    width: 100%;
+    height: 160px;
+
+    position: absolute;
+    top: -90px;
+    z-index: -1;
+  }
+
+  @media (min-width: 450px) {
+    .date-icon {
+      background: url(${icon}) no-repeat center right -30%;
+      background-size: 200px;
+      height: 200px;
+
+      top: -120px;
+    }
+  }
+
   @media (min-width: 576px) {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background: url(${icon}) no-repeat right -120px top -20px;
-    background-size: 260px;
+    .date-icon {
+      background: url(${icon}) no-repeat center right -20%;
+      background-size: 220px;
+
+      top: -140px;
+    }
   }
 
   @media (min-width: 768px) {
-    background: url(${icon}) no-repeat right -100px top -10px;
-    background-size: 280px;
+    .date-icon {
+      background: url(${icon}) no-repeat center right -20%;
+      background-size: 250px;
+
+      top: -150px;
+    }
+
     .date-container {
       font-size: 2rem;
     }
   }
-
   @media (min-width: 992px) {
-    padding-top: 3rem;
-    background: url(${icon}) no-repeat right 0px top -35px;
-    background-size: 300px;
+    .date-icon {
+      background: url(${icon}) no-repeat center right -20%;
+      background-size: 300px;
+      height: 300px;
+
+      top: -160px;
+    }
+
+    .date-container {
+      font-size: 2.5rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    .date-icon {
+      background: url(${icon}) no-repeat center right;
+      background-size: 350px;
+      height: 350px;
+
+      top: -180px;
+    }
   }
 `;
 
@@ -74,7 +109,8 @@ const Date = (props: {
   year: string;
 }) => {
   return (
-    <StyledDate className="date">
+    <StyledDate className="date" style={{ position: 'relative' }}>
+      <div className="date-icon"></div>
       <Container>
         <SubTitle text={props.text} />
 

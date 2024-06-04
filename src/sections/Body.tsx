@@ -10,6 +10,7 @@ import Separator from '../components/Separator';
 
 import Imagen from '../components/Imagen';
 import GeneralText from '../components/GeneralText';
+import Spoty from '../components/Spoty';
 
 const StyledBody = styled.section`
   width: 100%;
@@ -63,6 +64,7 @@ const Components = [
   { name: 'Separator', component: Separator },
   { name: 'Imagen', component: Imagen },
   { name: 'GeneralText', component: GeneralText },
+  { name: 'Spoty', component: Spoty },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

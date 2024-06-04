@@ -150,6 +150,26 @@ const GiftObjects = [
   },
 ];
 
+const Music = [
+  {
+    name: 'MainTitle',
+    text: 'Musica',
+    style: {
+      width: '100%',
+      textAlign: 'center',
+    },
+  },
+  {
+    name: 'GeneralText',
+    texts: [
+      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
+    ],
+  },
+  {
+    name: 'Spoty',
+  },
+];
+
 function App() {
   return (
     <>
@@ -158,6 +178,7 @@ function App() {
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
       <Body InfoList={GiftObjects} />
+      <Body InfoList={Music} />
     </>
   );
 }

@@ -20,11 +20,21 @@ const StyledImageCallAction = styled.div`
   .container-ImageCallAction {
     margin-bottom: 0;
     padding-top: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     img {
       width: 100%;
-      height: 200px;
+      max-width: 600px;
+      height: 300px;
       margin: 1rem auto;
       object-fit: contain;
+    }
+
+    a {
+      width: 100%;
     }
   }
 `;

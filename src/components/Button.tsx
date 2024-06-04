@@ -11,7 +11,7 @@ const StyledButton = styled.a`
   outline: none;
 
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   padding: 5px 15px;
   font-size: 1.5rem;
 

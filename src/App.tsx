@@ -149,18 +149,18 @@ const GiftObjects = [
     },
   },
   {
-    name: 'GeneralText',
-    texts: [
-      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
-    ],
-  },
-  {
     name: 'MainTitle',
     text: 'Musica',
     style: {
       width: '100%',
       textAlign: 'center',
     },
+  },
+  {
+    name: 'GeneralText',
+    texts: [
+      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
+    ],
   },
   {
     name: 'Spoty',

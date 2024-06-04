@@ -148,9 +148,12 @@ const GiftObjects = [
       textAlign: 'center',
     },
   },
-];
-
-const Music = [
+  {
+    name: 'GeneralText',
+    texts: [
+      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
+    ],
+  },
   {
     name: 'MainTitle',
     text: 'Musica',
@@ -158,12 +161,6 @@ const Music = [
       width: '100%',
       textAlign: 'center',
     },
-  },
-  {
-    name: 'GeneralText',
-    texts: [
-      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
-    ],
   },
   {
     name: 'Spoty',
@@ -178,7 +175,6 @@ function App() {
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
       <Body InfoList={GiftObjects} />
-      <Body InfoList={Music} />
     </>
   );
 }

@@ -7,7 +7,7 @@ import logoFinca from './assets/images/finca.png';
 import icon1 from './assets/images/contails.png';
 import icon2 from './assets/images/sign.png';
 import icon3 from './assets/images/brindis.png';
-import icon4 from './assets/images/iglesia copy.png';
+import icon4 from './assets/images/iglesia.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
 

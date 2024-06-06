@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import { SVGProps } from 'react';
 type svgProps = SVGProps<SVGSVGElement>;
 
 export default function Resort(props: svgProps) {

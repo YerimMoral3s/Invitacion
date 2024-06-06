@@ -187,7 +187,7 @@ const FullImage = (props: { img: string; onClose: () => void }) => {
       <div className="close">
         <button onClick={props.onClose}>X</button>
       </div>
-      <img src={props.img} alt="Full Image" />
+      <img src={props.img} alt="Full Image" style={{ pointerEvents: 'none' }} />
     </StyledFullImage>
   );
 };

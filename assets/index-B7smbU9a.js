@@ -557,7 +557,7 @@ Error generating stack: `+l.message+`
       width: 40px;
     }
   }
-`,wh=e=>a.jsxs(xh,{onClick:e.onClose,children:[a.jsx("div",{className:"close",children:a.jsx("button",{onClick:e.onClose,children:"X"})}),a.jsx("img",{src:e.img,alt:"Full Image"})]}),Sh=q.section`
+`,wh=e=>a.jsxs(xh,{onClick:e.onClose,children:[a.jsx("div",{className:"close",children:a.jsx("button",{onClick:e.onClose,children:"X"})}),a.jsx("img",{src:e.img,alt:"Full Image",style:{pointerEvents:"none"}})]}),Sh=q.section`
   width: 100%;
   display: flex;
   flex-direction: column;

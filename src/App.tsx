@@ -132,13 +132,13 @@ const giftsLocalities = [
   {
     name: 'Gallery',
     images: [
-      'https://picsum.photos/1000?random=1',
+      'https://picsum.photos/900/1200?random=1',
       'https://picsum.photos/1000?random=2',
       'https://picsum.photos/1000?random=3',
-      'https://picsum.photos/1000?random=4',
-      'https://picsum.photos/1000?random=5',
+      'https://picsum.photos/1000/1200?random=4',
+      'https://picsum.photos/600/500?random=5',
       'https://picsum.photos/1000?random=6',
-      'https://picsum.photos/1000?random=7',
+      'https://picsum.photos/1200/900?random=7',
     ],
   },
 ];

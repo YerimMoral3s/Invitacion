@@ -89,11 +89,16 @@ export default function Gallery(props: GalleryProps) {
     }
   }, [fullImage]);
 
+  const handleClose = (e?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e?.target as HTMLElement;
+    if (target?.id !== 'img') {
+      setFullImage(null);
+    }
+  };
+
   return (
     <>
-      {fullImage && (
-        <FullImage img={fullImage} onClose={() => setFullImage(null)} />
-      )}
+      {fullImage && <FullImage img={fullImage} onClose={handleClose} />}
       <StyledGallery>
         <Container>
           <div className="grid">
@@ -181,13 +186,17 @@ const StyledFullImage = styled.div`
   }
 `;
 
-const FullImage = (props: { img: string; onClose: () => void }) => {
+const FullImage = (props: {
+  img: string;
+
+  onClose: (event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}) => {
   return (
-    <StyledFullImage onClick={props.onClose}>
+    <StyledFullImage onClick={(e) => props.onClose(e)} id="close">
       <div className="close">
-        <button onClick={props.onClose}>X</button>
+        <button onClick={() => props.onClose()}>X</button>
       </div>
-      <img src={props.img} alt="Full Image" style={{ pointerEvents: 'none' }} />
+      <img src={props.img} alt="Full Image" id="img" />
     </StyledFullImage>
   );
 };

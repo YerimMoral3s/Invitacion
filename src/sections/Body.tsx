@@ -12,6 +12,7 @@ import Imagen from '../components/Imagen';
 import GeneralText from '../components/GeneralText';
 import Spoty from '../components/Spoty';
 import PlacesToStay from '../components/PlacesToStay';
+import Gallery from '../components/Gallery';
 
 const StyledBody = styled.section`
   width: 100%;
@@ -67,6 +68,7 @@ const Components = [
   { name: 'GeneralText', component: GeneralText },
   { name: 'Spoty', component: Spoty },
   { name: 'PlacesToStay', component: PlacesToStay },
+  { name: 'Gallery', component: Gallery },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

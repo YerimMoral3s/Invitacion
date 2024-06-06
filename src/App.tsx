@@ -129,6 +129,18 @@ const giftsLocalities = [
     buttonText: 'Ver Mesa de Regalos',
     href: 'https://goo.gl/maps/7Q3',
   },
+  {
+    name: 'Gallery',
+    images: [
+      'https://picsum.photos/1000?random=1',
+      'https://picsum.photos/1000?random=2',
+      'https://picsum.photos/1000?random=3',
+      'https://picsum.photos/1000?random=4',
+      'https://picsum.photos/1000?random=5',
+      'https://picsum.photos/1000?random=6',
+      'https://picsum.photos/1000?random=7',
+    ],
+  },
 ];
 
 const placesAndSpoty = [
@@ -189,8 +201,8 @@ const placesAndSpoty = [
   {
     name: 'GeneralText',
     texts: [
-      'Cual es tu canción favorita,',
-      '¿Cuál te gustaría escuchar en nuestra boda?,',
+      '¿Cual es tu canción favorita?',
+      '¿Cuál te gustaría escuchar en nuestra boda?',
       '¡Déjanos tu sugerencia!',
     ],
   },

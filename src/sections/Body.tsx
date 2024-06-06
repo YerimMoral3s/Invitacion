@@ -11,6 +11,7 @@ import Separator from '../components/Separator';
 import Imagen from '../components/Imagen';
 import GeneralText from '../components/GeneralText';
 import Spoty from '../components/Spoty';
+import PlacesToStay from '../components/PlacesToStay';
 
 const StyledBody = styled.section`
   width: 100%;
@@ -65,6 +66,7 @@ const Components = [
   { name: 'Imagen', component: Imagen },
   { name: 'GeneralText', component: GeneralText },
   { name: 'Spoty', component: Spoty },
+  { name: 'PlacesToStay', component: PlacesToStay },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,7 +82,8 @@ function Body(props: { InfoList: any[] }) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <Component {...(rest as any)} id={name} key={name + '_' + idx} />;
     }
-    return <></>;
+
+    return null;
   });
 
   return <StyledBody>{Comps}</StyledBody>;

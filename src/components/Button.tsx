@@ -15,6 +15,8 @@ const StyledButton = styled.a`
   padding: 5px 15px;
   font-size: 1.5rem;
 
+  align-text: center;
+
   font-family: rosarivo-italic;
   text-transform: uppercase;
 

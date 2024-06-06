@@ -107,18 +107,7 @@ const ReligiosaObjects = [
   },
 ];
 
-const GiftObjects = [
-  // {
-  //   name: 'Imagen',
-  //   src: img,
-  //   alt: 'Imagen',
-  //   style: {
-  //     width: '100%',
-  //     height: '500px',
-  //     objectFit: 'cover',
-  //     filter: 'grayscale(1)',
-  //   },
-  // },
+const giftsLocalities = [
   {
     name: 'GeneralText',
     texts: [
@@ -140,6 +129,9 @@ const GiftObjects = [
     buttonText: 'Ver Mesa de Regalos',
     href: 'https://goo.gl/maps/7Q3',
   },
+];
+
+const placesAndSpoty = [
   {
     name: 'MainTitle',
     text: 'Opciones de Hospedaje',
@@ -147,6 +139,44 @@ const GiftObjects = [
       width: '100%',
       textAlign: 'center',
     },
+  },
+  {
+    name: 'GeneralText',
+    texts: [
+      'Estas son algunas opciones de hospedaje en la zona',
+      '¡Reserva con tiempo!',
+    ],
+  },
+  {
+    // hoteles y hospedajes
+    name: 'PlacesToStay',
+    places: [
+      {
+        name: 'Hotel 1',
+        image: 'https://picsum.photos/500',
+        address: 'Dirección 1',
+        phone: '1234567890',
+        email: 'email@test.com',
+        website: 'https://www.google.com',
+        airbnb: 'https://www.airbnb.com',
+        type: 'hotel',
+      },
+      {
+        name: 'Hotel 2',
+        image: 'https://picsum.photos/500',
+        address: 'Dirección 2',
+        phone: '1234567890',
+        website: 'https://www.google.com',
+        type: 'resort',
+      },
+      {
+        name: 'Hotel 3',
+        image: 'https://picsum.photos/500',
+        address: 'Dirección 3',
+        email: 'email@test.com',
+        type: 'resort',
+      },
+    ],
   },
   {
     name: 'MainTitle',
@@ -159,7 +189,9 @@ const GiftObjects = [
   {
     name: 'GeneralText',
     texts: [
-      'Cual es tu canción favorita, ¿Cuál te gustaría escuchar en nuestra boda? ¡Déjanos tu sugerencia!',
+      'Cual es tu canción favorita,',
+      '¿Cuál te gustaría escuchar en nuestra boda?,',
+      '¡Déjanos tu sugerencia!',
     ],
   },
   {
@@ -174,7 +206,8 @@ function App() {
       <NuestraHistoria />
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
-      <Body InfoList={GiftObjects} />
+      <Body InfoList={giftsLocalities} />
+      <Body InfoList={placesAndSpoty} />
     </>
   );
 }

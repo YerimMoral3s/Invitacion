@@ -17,10 +17,9 @@ const StyledImageCallAction = styled.div`
   width: 100%;
   text-align: center;
 
-  .container-ImageCallAction {
-    margin-bottom: 0;
-    padding-top: 0;
+  margin-bottom: 1rem;
 
+  .container-ImageCallAction {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +28,7 @@ const StyledImageCallAction = styled.div`
       width: 100%;
       max-width: 600px;
       height: 300px;
-      margin: 1rem auto;
+      margin: 0 auto;
       object-fit: contain;
     }
 

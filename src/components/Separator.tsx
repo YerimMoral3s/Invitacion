@@ -51,8 +51,9 @@ const StyledSeparator = styled.div`
 `;
 
 type SeparatorProps = {
-  title: string;
-  href: string;
+  title?: string;
+  message?: string;
+  href?: string;
 };
 
 const Separator = (props: SeparatorProps) => {
@@ -60,16 +61,20 @@ const Separator = (props: SeparatorProps) => {
     <>
       <StyledSeparator>
         <Container className="dress-code-container">
-          <Text className="text" as="h2" text="Vestimenta" />
-          <Text className="text" as="h1" text={props.title} />
-          <a
-            className="text"
-            href={props.href}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver Detalles
-          </a>
+          {props.title && <Text className="text" as="h2" text={props.title} />}
+          {props.message && (
+            <Text className="text" as="h1" text={props.message} />
+          )}
+          {props.href && (
+            <a
+              className="text"
+              href={props.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ver Detalles
+            </a>
+          )}
         </Container>
       </StyledSeparator>
       <img

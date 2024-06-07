@@ -3,7 +3,7 @@ import Container from './Container';
 
 const StyledSpoty = styled.div`
   width: 100%;
-  height: 500px;
+  height: calc(500px + 2rem);
 `;
 
 export default function Spoty() {

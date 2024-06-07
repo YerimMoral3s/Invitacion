@@ -54,6 +54,7 @@ const CivilObjects = [
 
   {
     name: 'Separator',
+    message: 'Vestimenta',
     title: 'Coctél',
     href: 'https://www.google.com/maps/dir//formal',
   },
@@ -103,6 +104,7 @@ const ReligiosaObjects = [
   {
     name: 'Separator',
     title: 'Formal',
+    message: 'Vestimenta',
     href: 'https://www.google.com/maps/dir//formal',
   },
 ];
@@ -220,6 +222,30 @@ const placesAndSpoty = [
   {
     name: 'Spoty',
   },
+  {
+    name: 'MainTitle',
+    text: 'Confirmación',
+    style: {
+      width: '100%',
+      textAlign: 'center',
+    },
+  },
+  {
+    name: 'GeneralText',
+    texts: [
+      'Para nosotros es muy importante saber si podrás acompañarnos en este día tan especial.',
+      '¡Esperamos contar con tu presencia!',
+    ],
+  },
+  {
+    name: 'Form',
+  },
+
+  {
+    name: 'Separator',
+    title: 'Esperamos verte pronto',
+    message: 'Muchas Gracias',
+  },
 ];
 
 function App() {
@@ -229,10 +255,11 @@ function App() {
       <NuestraHistoria />
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
-
       <Body InfoList={giftsLocalities} />
       <Body InfoList={gallery} />
       <Body InfoList={placesAndSpoty} />
+      <br />
+      <br />
     </>
   );
 }

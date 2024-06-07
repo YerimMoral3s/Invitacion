@@ -13,6 +13,7 @@ import GeneralText from '../components/GeneralText';
 import Spoty from '../components/Spoty';
 import PlacesToStay from '../components/PlacesToStay';
 import Gallery from '../components/Gallery';
+import Form from '../components/Form';
 
 const StyledBody = styled.section`
   width: 100%;
@@ -69,6 +70,7 @@ const Components = [
   { name: 'Spoty', component: Spoty },
   { name: 'PlacesToStay', component: PlacesToStay },
   { name: 'Gallery', component: Gallery },
+  { name: 'Form', component: Form },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

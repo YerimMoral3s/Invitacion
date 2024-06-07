@@ -131,9 +131,6 @@ const gifts = [
     buttonText: 'Ver Mesa de Regalos',
     href: 'https://goo.gl/maps/7Q3',
   },
-];
-
-const gallery = [
   {
     name: 'MainTitle',
     text: 'Galería',
@@ -142,6 +139,9 @@ const gallery = [
       textAlign: 'center',
     },
   },
+];
+
+const obj1 = [
   {
     name: 'Gallery',
     images: [
@@ -171,7 +171,7 @@ const gallery = [
   },
 ];
 
-const placesAndSpoty = [
+const places = [
   {
     // hoteles y hospedajes
     name: 'PlacesToStay',
@@ -221,7 +221,7 @@ const placesAndSpoty = [
   },
 ];
 
-const confirmAndSpoty = [
+const obj2 = [
   {
     name: 'Spoty',
   },
@@ -259,9 +259,9 @@ function App() {
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
       <Body InfoList={gifts} />
-      <Body InfoList={gallery} />
-      <Body InfoList={placesAndSpoty} />
-      <Body InfoList={confirmAndSpoty} />
+      <Body InfoList={obj1} />
+      <Body InfoList={places} />
+      <Body InfoList={obj2} />
       <br />
       <br />
     </>

@@ -109,7 +109,7 @@ const ReligiosaObjects = [
   },
 ];
 
-const giftsLocalities = [
+const gifts = [
   {
     name: 'GeneralText',
     texts: [
@@ -154,9 +154,6 @@ const gallery = [
       'https://picsum.photos/1200/900?random=7',
     ],
   },
-];
-
-const placesAndSpoty = [
   {
     name: 'MainTitle',
     text: 'Opciones de Hospedaje',
@@ -172,6 +169,9 @@ const placesAndSpoty = [
       '¡Reserva con tiempo!',
     ],
   },
+];
+
+const placesAndSpoty = [
   {
     // hoteles y hospedajes
     name: 'PlacesToStay',
@@ -219,6 +219,9 @@ const placesAndSpoty = [
       '¡Déjanos tu sugerencia!',
     ],
   },
+];
+
+const confirmAndSpoty = [
   {
     name: 'Spoty',
   },
@@ -255,9 +258,10 @@ function App() {
       <NuestraHistoria />
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
-      <Body InfoList={giftsLocalities} />
+      <Body InfoList={gifts} />
       <Body InfoList={gallery} />
       <Body InfoList={placesAndSpoty} />
+      <Body InfoList={confirmAndSpoty} />
       <br />
       <br />
     </>

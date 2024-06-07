@@ -129,6 +129,17 @@ const giftsLocalities = [
     buttonText: 'Ver Mesa de Regalos',
     href: 'https://goo.gl/maps/7Q3',
   },
+];
+
+const gallery = [
+  {
+    name: 'MainTitle',
+    text: 'Galería',
+    style: {
+      width: '100%',
+      textAlign: 'center',
+    },
+  },
   {
     name: 'Gallery',
     images: [
@@ -218,7 +229,9 @@ function App() {
       <NuestraHistoria />
       <Body InfoList={CivilObjects} />
       <Body InfoList={ReligiosaObjects} />
+
       <Body InfoList={giftsLocalities} />
+      <Body InfoList={gallery} />
       <Body InfoList={placesAndSpoty} />
     </>
   );

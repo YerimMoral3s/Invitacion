@@ -104,7 +104,7 @@ export default function Form() {
 
       <div className="form-btns">
         <button type="submit">Confirmar asistencia</button>
-        <button type="button">Cancelar</button>
+        <button type="button">No podre asistir</button>
       </div>
     </StyledForm>
   );

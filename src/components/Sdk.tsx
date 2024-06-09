@@ -1,46 +1,12 @@
 import { create } from 'zustand';
 
-type SubGuestAttributes = {
-  Name: string;
-  Confirmation: boolean;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-};
-
-type SubGuest = {
-  id: number;
-  attributes: SubGuestAttributes;
-};
-
-type Attributes = {
-  phone_number: string;
-  name: string;
-  confirmation: boolean;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  sub_guests: {
-    data: SubGuest[];
-  };
-};
-
-type User = {
-  id: number;
-  attributes: Attributes;
-};
-
-type SdkState = {
+export type SdkState = {
   user?: User;
   getUser: (id: string) => Promise<void>;
+  updateSubGuest: (subGuest: SubGuest) => Promise<void>;
 };
 
-type ApiResponse = {
-  data: User;
-  error?: unknown;
-};
-
-export const useSDK = create<SdkState>((set) => ({
+export const useSDK = create<SdkState>((set, get) => ({
   getUser: async (id: string) => {
     const url = 'http://server-is.wip-mx.com/api/';
     const requestOptions = {
@@ -65,4 +31,52 @@ export const useSDK = create<SdkState>((set) => ({
       set({ user: undefined });
     }
   },
+  updateSubGuest: async (subGuest: SubGuest) => {
+    const user = get().user;
+
+    if (!user) {
+      return;
+    }
+
+    user.attributes.sub_guests.data.filter((sg) => {
+      if (sg.id === subGuest.id) {
+        sg.attributes.Confirmation = subGuest.attributes.Confirmation;
+      }
+    });
+  },
 }));
+
+export type SubGuestAttributes = {
+  Name: string;
+  Confirmation: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};
+
+export type SubGuest = {
+  id: number;
+  attributes: SubGuestAttributes;
+};
+
+export type Attributes = {
+  phone_number: string;
+  name: string;
+  confirmation: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  sub_guests: {
+    data: SubGuest[];
+  };
+};
+
+export type User = {
+  id: number;
+  attributes: Attributes;
+};
+
+export type ApiResponse = {
+  data: User;
+  error?: unknown;
+};

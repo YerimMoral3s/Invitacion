@@ -1,64 +1,37 @@
 import styled from 'styled-components';
 import Container from './Container';
 import Text from './Text';
-import { colors } from '../assets/theme';
-import { useSDK } from './Sdk';
+import { SubGuest, useSDK } from './Sdk';
 import { useCallback, useEffect } from 'react';
+import { colors } from '../assets/theme';
 
 const StyledForm = styled.form`
   width: 100%;
   text-align: center;
   font-family: jakarta-regular;
 
-  .form {
+  .cheks-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 10px auto;
+    justify-content: center;
+  }
+
+  .form-btns {
+    display: flex;
     justify-content: center;
 
-    .form-item {
-      margin: 1rem 0;
-
-      width: 100%;
-
-      max-width: 500px;
-
-      input {
-        width: 100%;
-        max-width: 300px;
-        flex: 1;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border-radius: 5px;
-        border: 1px dotted #000;
-        outline: none;
-        margin: 0.5rem;
-      }
-
-      label {
-        font-size: 1rem;
-        font-weight: 600;
-      }
-    }
-    .butons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      button {
-        margin: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        border: none;
-
-        font-size: 1rem;
-        cursor: pointer;
-        outline: none;
-
-        background-color: ${colors.green};
-        color: ${colors.white};
-      }
-    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: ${colors.green};
+      color: white;
+      font-family: jakarta-regular;
+      cursor: pointer;
+      border: none;
+      font-size: 14px;
   }
 `;
 
@@ -93,6 +66,12 @@ export default function Form() {
     getUser();
   }, []);
 
+  const onChangeCheckbox = (subGuest: SubGuest, checked: boolean) => {
+    subGuest.attributes.Confirmation = checked;
+
+    sdk.updateSubGuest(subGuest);
+  };
+
   if (!sdk.user) {
     return null;
   }
@@ -101,16 +80,70 @@ export default function Form() {
     <StyledForm
       onSubmit={(e) => {
         e.preventDefault();
-        console.log('jalo');
       }}
     >
       <Container>
-        {/* TODO: NAME */}
         <Text
           text={`!Hola ${sdk.user.attributes.name}!, para poder confirmar tu asistencia, es importante que nos indiques cuantas personas te van a acompañar`}
         />
         <br />
+        <Text text="Por favor, indicanos quien de las siguientes personas te van a caompañar" />
+        <div className="cheks-list">
+          {sdk.user.attributes.sub_guests.data.map((subGuest) => {
+            return (
+              <SubGuestCheckbox
+                onChangeCheckbox={onChangeCheckbox}
+                key={subGuest.id}
+                subGuest={subGuest}
+              />
+            );
+          })}
+        </div>
+        <Text text="Recuerda que por seguridad, solo pueden asistir las personas que esten registradas y que esten confirmadas" />
       </Container>
+
+      <div className="form-btns">
+        <button type="submit">Confirmar asistencia</button>
+        <button type="button">Cancelar</button>
+      </div>
     </StyledForm>
   );
 }
+
+const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
+  margin-right: 5px;
+  border-radius: 5px;
+`;
+
+const StyledSubGuestCheckbox = styled.label`
+  font-family: jakarta-regular;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: ${colors.green};
+  color: white;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+`;
+
+const SubGuestCheckbox = ({
+  subGuest,
+  onChangeCheckbox,
+}: {
+  subGuest: SubGuest;
+  onChangeCheckbox: (subGuest: SubGuest, checked: boolean) => void;
+}) => {
+  return (
+    <StyledSubGuestCheckbox>
+      <StyledCheckbox
+        checked={subGuest.attributes.Confirmation}
+        id={`${subGuest.id}`}
+        type="checkbox"
+        onChange={(e) => onChangeCheckbox(subGuest, e.target.checked)}
+      />
+      <label htmlFor={`${subGuest.id}`}>{subGuest.attributes.Name}</label>
+    </StyledSubGuestCheckbox>
+  );
+};

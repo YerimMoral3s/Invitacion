@@ -2,35 +2,8 @@ import styled from 'styled-components';
 import Container from './Container';
 import Text from './Text';
 import { colors } from '../assets/theme';
-
-const forms = [
-  // {
-  //   name: 'Name',
-  //   type: 'text',
-  //   placeholder: 'Nombre',
-  //   required: true,
-  // },
-  // {
-  //   name: 'Email',
-  //   type: 'email',
-  //   placeholder: 'Correo',
-  //   required: true,
-  // },
-  // {
-  //   name: 'Phone',
-  //   type: 'tel',
-  //   placeholder: 'Teléfono',
-  //   required: true,
-  // },
-  {
-    label: 'Total de acompañantes',
-    id: 'people',
-    name: 'People',
-    type: 'border-radius',
-    max: 5,
-    required: true,
-  },
-];
+import { useSDK } from './Sdk';
+import { useCallback, useEffect } from 'react';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -89,7 +62,41 @@ const StyledForm = styled.form`
   }
 `;
 
+type UrlParams = {
+  [key: string]: string;
+};
+
+const getUrlParams = <T extends UrlParams>(): T => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const result = {} as T;
+
+  urlParams.forEach((value, key) => {
+    result[key as keyof T] = value as T[keyof T];
+  });
+
+  return result;
+};
+
 export default function Form() {
+  const sdk = useSDK();
+  const getUser = useCallback(async () => {
+    const params = getUrlParams<{ id?: string }>();
+
+    if (!params.id) {
+      return;
+    }
+
+    await sdk.getUser(params.id);
+  }, [sdk]);
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  if (!sdk.user) {
+    return null;
+  }
+
   return (
     <StyledForm
       onSubmit={(e) => {
@@ -99,26 +106,10 @@ export default function Form() {
     >
       <Container>
         {/* TODO: NAME */}
-        <Text text="!Hola XXXXX!, para poder confirmar tu asistencia, es importante que nos indiques cuantas personas te van a acompañar" />
+        <Text
+          text={`!Hola ${sdk.user.attributes.name}!, para poder confirmar tu asistencia, es importante que nos indiques cuantas personas te van a acompañar`}
+        />
         <br />
-        <Text text="Recuerda que puedes llevar hasta X numero de personas" />
-        <div className="form">
-          {forms.map((form) => (
-            <div key={form.id} className={`form-item form${form.id}`}>
-              <label htmlFor={form.id}>{form.label}</label>
-              <input
-                id={form.id}
-                name={form.name}
-                type={form.type}
-                required={form.required}
-              />
-            </div>
-          ))}
-          <div className="butons">
-            <button type="submit">Condirmar</button>
-            <button>Cancelar</button>
-          </div>
-        </div>
       </Container>
     </StyledForm>
   );

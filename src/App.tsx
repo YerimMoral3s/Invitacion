@@ -10,6 +10,8 @@ import icon3 from './assets/images/brindis.png';
 import icon4 from './assets/images/iglesia.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
+import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
+import { ProviderSDK, useSDK } from './components/Sdk';
 
 const CivilObjects = [
   {

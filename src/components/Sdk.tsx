@@ -4,7 +4,6 @@ export type SdkState = {
   user?: User;
   getUser: (id: string) => Promise<User | undefined>;
   updateSubGuest: (subGuest: SubGuest) => Promise<void>;
-  // updateGuest: () => Promise<User | undefined>;
   acceptInvitation: () => Promise<User | undefined>;
   declineInvitation: () => Promise<User | undefined>;
 };

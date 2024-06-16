@@ -4,6 +4,7 @@ import Text from './Text';
 import { SubGuest, useSDK } from './Sdk';
 import { useCallback, useEffect } from 'react';
 import { colors } from '../assets/theme';
+import { loaderStore } from './Loader';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -53,7 +54,7 @@ const getUrlParams = <T extends UrlParams>(): T => {
 
 export default function Form() {
   const sdk = useSDK();
-
+  const loaderstore = loaderStore();
   const getUser = useCallback(async () => {
     const params = getUrlParams<{ id?: string }>();
 
@@ -83,11 +84,12 @@ export default function Form() {
 
   const onSubmit = async () => {
     console.log('submit', { ...sdk });
-    await sdk.acceptInvitation();
+
+    loaderstore.addPromise(sdk.acceptInvitation());
   };
 
   const onDecline = async () => {
-    await sdk.declineInvitation();
+    loaderstore.addPromise(sdk.declineInvitation());
   };
 
   return (

@@ -13,9 +13,7 @@ const url = 'http://server-is.wip-mx.com/api/';
 
 export const useSDK = create<SdkState>((set, get) => ({
   getUser: async (id: string) => {
-    const requestOptions = {
-      method: 'GET',
-    };
+    const requestOptions = { method: 'GET' };
 
     try {
       const response = await fetch(
@@ -30,16 +28,15 @@ export const useSDK = create<SdkState>((set, get) => ({
         return undefined;
       } else {
         set({ user: user.data });
-        console.log('user', {
-          user: user.data,
-        });
         return user.data;
       }
     } catch (error) {
       console.error('Failed to fetch user:', error);
       set({ user: undefined });
+      return undefined;
     }
   },
+
   updateSubGuest: async (subGuest: SubGuest) => {
     const user = get().user;
 
@@ -47,13 +44,27 @@ export const useSDK = create<SdkState>((set, get) => ({
       return;
     }
 
-    user.attributes.sub_guests.data.find((sg) => {
-      if (sg.id === subGuest.id) {
-        sg.attributes.confirmation = subGuest.attributes.confirmation;
-      }
-    });
+    const updatedSubGuests = user.attributes.sub_guests.data.map((sg) =>
+      sg.id === subGuest.id
+        ? {
+            ...sg,
+            attributes: {
+              ...sg.attributes,
+              confirmation: subGuest.attributes.confirmation,
+            },
+          }
+        : sg,
+    );
 
-    set({ user });
+    set({
+      user: {
+        ...user,
+        attributes: {
+          ...user.attributes,
+          sub_guests: { data: updatedSubGuests },
+        },
+      },
+    });
   },
 
   acceptInvitation: async () => {
@@ -81,10 +92,7 @@ export const useSDK = create<SdkState>((set, get) => ({
         body: raw,
       };
 
-      const response = await fetch(
-        'http://server-is.wip-mx.com/api/confirmAssistance',
-        requestOptions,
-      );
+      const response = await fetch(`${url}confirmAssistance`, requestOptions);
 
       if (response.status !== 200) {
         console.error('Failed to update user:', response);
@@ -93,11 +101,14 @@ export const useSDK = create<SdkState>((set, get) => ({
 
       const updatedUser = await response.json();
 
+      console.log('updatedUser', updatedUser);
+
       set({
         user: {
           ...user,
           attributes: {
-            ...updatedUser.data,
+            ...user.attributes,
+            ...updatedUser.data.attributes,
             sub_guests: {
               data: updatedUser.data.sub_guests.map((sg: SubGuest) => ({
                 id: sg.id,
@@ -110,62 +121,66 @@ export const useSDK = create<SdkState>((set, get) => ({
 
       return get().user;
     } catch (error) {
-      console.error('Failed to fetch user:', error);
+      console.error('Failed to accept invitation:', error);
+      return undefined;
     }
   },
 
   declineInvitation: async () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    const user = get().user;
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      const user = get().user;
 
-    if (!user) {
-      return undefined;
-    }
+      if (!user) {
+        return undefined;
+      }
 
-    const raw = JSON.stringify({
-      id: user.id,
-      confirmation: false,
-      sub_guests: user.attributes.sub_guests.data.map((sg) => ({
-        id: sg.id,
+      const raw = JSON.stringify({
+        id: user.id,
         confirmation: false,
-      })),
-    });
+        sub_guests: user.attributes.sub_guests.data.map((sg) => ({
+          id: sg.id,
+          confirmation: false,
+        })),
+      });
 
-    const requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-    };
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+      };
 
-    const response = await fetch(
-      'http://server-is.wip-mx.com/api/confirmAssistance',
-      requestOptions,
-    );
+      const response = await fetch(`${url}confirmAssistance`, requestOptions);
 
-    if (response.status !== 200) {
-      console.error('Failed to update user:', response);
-      return undefined;
-    }
+      if (response.status !== 200) {
+        console.error('Failed to update user:', response);
+        return undefined;
+      }
 
-    const updatedUser = await response.json();
+      const updatedUser = await response.json();
 
-    set({
-      user: {
-        ...user,
-        attributes: {
-          ...updatedUser.data,
-          sub_guests: {
-            data: updatedUser.data.sub_guests.map((sg: SubGuest) => ({
-              id: sg.id,
-              attributes: { ...sg },
-            })),
+      set({
+        user: {
+          ...user,
+          attributes: {
+            ...user.attributes,
+            ...updatedUser.data.attributes,
+            sub_guests: {
+              data: updatedUser.data.sub_guests.map((sg: SubGuest) => ({
+                id: sg.id,
+                attributes: { ...sg },
+              })),
+            },
           },
         },
-      },
-    });
+      });
 
-    return get().user;
+      return get().user;
+    } catch (error) {
+      console.error('Failed to decline invitation:', error);
+      return undefined;
+    }
   },
 }));
 

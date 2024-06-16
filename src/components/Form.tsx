@@ -32,6 +32,7 @@ const StyledForm = styled.form`
       cursor: pointer;
       border: none;
       font-size: 14px;
+    }
   }
 `;
 
@@ -52,6 +53,7 @@ const getUrlParams = <T extends UrlParams>(): T => {
 
 export default function Form() {
   const sdk = useSDK();
+
   const getUser = useCallback(async () => {
     const params = getUrlParams<{ id?: string }>();
 
@@ -60,26 +62,39 @@ export default function Form() {
     }
 
     await sdk.getUser(params.id);
-  }, [sdk]);
+  }, []);
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
-  const onChangeCheckbox = (subGuest: SubGuest, checked: boolean) => {
-    subGuest.attributes.Confirmation = checked;
+  const onChangeCheckbox = async (subGuest: SubGuest, checked: boolean) => {
+    const updatedSubGuest = {
+      ...subGuest,
+      attributes: { ...subGuest.attributes, confirmation: checked },
+    };
 
-    sdk.updateSubGuest(subGuest);
+    sdk.updateSubGuest(updatedSubGuest);
   };
 
   if (!sdk.user) {
     return null;
   }
 
+  const onSubmit = async () => {
+    console.log('submit', { ...sdk });
+    await sdk.acceptInvitation();
+  };
+
+  const onDecline = async () => {
+    await sdk.declineInvitation();
+  };
+
   return (
     <StyledForm
       onSubmit={(e) => {
         e.preventDefault();
+        onSubmit();
       }}
     >
       <Container>
@@ -87,7 +102,7 @@ export default function Form() {
           text={`!Hola ${sdk.user.attributes.name}!, para poder confirmar tu asistencia, es importante que nos indiques cuantas personas te van a acompañar`}
         />
         <br />
-        <Text text="Por favor, indicanos quien de las siguientes personas te van a caompañar" />
+        <Text text="Por favor, indicanos quien de las siguientes personas te van a acompañar" />
         <div className="cheks-list">
           {sdk.user.attributes.sub_guests.data.map((subGuest) => {
             return (
@@ -99,12 +114,14 @@ export default function Form() {
             );
           })}
         </div>
-        <Text text="Recuerda que por seguridad, solo pueden asistir las personas que esten registradas y que esten confirmadas" />
+        <Text text="Recuerda que por seguridad, solo pueden asistir las personas que estén registradas y que estén confirmadas" />
       </Container>
 
       <div className="form-btns">
         <button type="submit">Confirmar asistencia</button>
-        <button type="button">No podre asistir</button>
+        <button type="button" onClick={onDecline}>
+          No podré asistir
+        </button>
       </div>
     </StyledForm>
   );
@@ -138,9 +155,8 @@ const SubGuestCheckbox = ({
   return (
     <StyledSubGuestCheckbox>
       <StyledCheckbox
-        checked={subGuest.attributes.Confirmation}
+        checked={subGuest.attributes.confirmation}
         id={`${subGuest.id}`}
-        type="checkbox"
         onChange={(e) => onChangeCheckbox(subGuest, e.target.checked)}
       />
       <label htmlFor={`${subGuest.id}`}>{subGuest.attributes.Name}</label>

@@ -12,7 +12,7 @@ export default function Spoty() {
       <Container>
         <iframe
           style={{ borderRadius: '12px', width: '100%' }}
-          src="https://open.spotify.com/embed/playlist/3VENZLfQoCZbS49i9JSS6y?utm_source=generator&theme=0"
+          src="https://open.spotify.com/embed/playlist/2UOSv33cfrcXLFybgdrqmF?utm_source=generator&theme=0"
           width="100%"
           height="500px"
           frameBorder="0"

@@ -3,7 +3,6 @@ import Container from './Container';
 import { colors } from '../assets/theme';
 import icon from '../assets/images/flower3.png';
 import Text from './Text';
-import { useSdk } from '../App';
 
 const StyledSeparator = styled.div`
   width: 100%;

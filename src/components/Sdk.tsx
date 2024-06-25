@@ -8,7 +8,8 @@ export type SdkState = {
   declineInvitation: () => Promise<User | undefined>;
 };
 
-const url = 'http://server-is.wip-mx.com/api/';
+const url = 'https://server-is.wip-mx.com/api/';
+// const url = 'http://localhost:1337/api/';
 
 export const useSDK = create<SdkState>((set, get) => ({
   getUser: async (id: string) => {

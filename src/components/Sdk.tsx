@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 
 export type SdkState = {
   user?: User;
@@ -101,14 +102,11 @@ export const useSDK = create<SdkState>((set, get) => ({
 
       const updatedUser = await response.json();
 
-      console.log('updatedUser', updatedUser);
-
       set({
         user: {
-          ...user,
+          id: updatedUser.data.id,
           attributes: {
-            ...user.attributes,
-            ...updatedUser.data.attributes,
+            ...updatedUser.data,
             sub_guests: {
               data: updatedUser.data.sub_guests.map((sg: SubGuest) => ({
                 id: sg.id,
@@ -162,10 +160,9 @@ export const useSDK = create<SdkState>((set, get) => ({
 
       set({
         user: {
-          ...user,
+          id: updatedUser.data.id,
           attributes: {
-            ...user.attributes,
-            ...updatedUser.data.attributes,
+            ...updatedUser.data,
             sub_guests: {
               data: updatedUser.data.sub_guests.map((sg: SubGuest) => ({
                 id: sg.id,

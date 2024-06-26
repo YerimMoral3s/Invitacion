@@ -11,6 +11,8 @@ import icon4 from './assets/images/iglesia.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
 import { Loader } from './components/Loader';
+import { useSDK } from './components/Sdk';
+import Separator from './components/Separator';
 
 const CivilObjects = [
   {
@@ -244,15 +246,26 @@ const obj2 = [
   {
     name: 'Form',
   },
-
-  {
-    name: 'Separator',
-    title: 'Esperamos verte pronto',
-    message: 'Muchas Gracias',
-  },
 ];
 
 function App() {
+  const user = useSDK((state) => state.user);
+  const getTile = () => {
+    if (user) {
+      return `¡Muchas Gracias!`;
+    }
+  };
+
+  const getMessages = () => {
+    if (user) {
+      if (user.attributes.confirmation) {
+        return `${user.attributes.name}, nos alegra mucho que puedas acompañarnos`;
+      }
+
+      return `${user.attributes.name}, qué pena que no puedas acompañarnos, te extrañaremos mucho`;
+    }
+  };
+
   return (
     <Loader>
       <PhotosAnimation />
@@ -263,6 +276,16 @@ function App() {
       <Body InfoList={obj1} />
       <Body InfoList={places} />
       <Body InfoList={obj2} />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {user && <Separator title={getMessages()} message={getTile()} />}
+      </div>
+
       <br />
       <br />
     </Loader>

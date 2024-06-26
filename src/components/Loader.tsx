@@ -6,24 +6,30 @@ import { colors } from '../assets/theme';
 type LoaderState<T = unknown> = {
   isLoading: boolean;
   promises: { id: string; promise: Promise<T> }[];
-  addPromise: (promise: Promise<T>) => void;
+  addPromise: (promise: Promise<T>, from: string) => void;
 };
 
 export const loaderStore = create<LoaderState>((set) => ({
   isLoading: false,
   promises: [],
 
-  addPromise: (promise: Promise<unknown>) => {
-    const id = Math.random().toString(36).substr(2, 9);
+  addPromise: (promise: Promise<unknown>, id: string) => {
+    set((state) => {
+      if (state.promises.some((p) => p.id === id)) {
+        return state;
+      }
 
-    set((state) => ({
-      promises: [...state.promises, { id, promise }],
-      isLoading: true,
-    }));
+      return {
+        promises: [...state.promises, { id, promise }],
+        isLoading: true,
+      };
+    });
 
     promise.finally(() => {
       set((state) => {
+        console.log('state.promises: ', state.promises);
         const updatedPromises = state.promises.filter((p) => p.id !== id);
+        console.log('updatedPromises: ', updatedPromises);
         return {
           promises: updatedPromises,
           isLoading: updatedPromises.length > 0,

@@ -67,6 +67,7 @@ export default function Form() {
 
   useEffect(() => {
     getUser();
+    loaderstore.addPromise(getUser(), 'form-getUser');
   }, [getUser]);
 
   const onChangeCheckbox = async (subGuest: SubGuest, checked: boolean) => {
@@ -85,11 +86,11 @@ export default function Form() {
   const onSubmit = async () => {
     console.log('submit', { ...sdk });
 
-    loaderstore.addPromise(sdk.acceptInvitation());
+    loaderstore.addPromise(sdk.acceptInvitation(), 'form-acceptInvitation');
   };
 
   const onDecline = async () => {
-    loaderstore.addPromise(sdk.declineInvitation());
+    loaderstore.addPromise(sdk.declineInvitation(), 'form-declineInvitation');
   };
 
   return (

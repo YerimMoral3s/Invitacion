@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { colors } from '../assets/theme';
 // images for web (lowRes)
 import img1_web from '../assets/images/images-couple/web/irv-son-1-web.jpg';
-// import img1_web from '../assets/images/images-couple/web/i|rv-son-1-web.jpg';
 import img2_web from '../assets/images/images-couple/web/irv-son-2-web.jpg';
 import img3_web from '../assets/images/images-couple/web/irv-son-3-web.jpg';
 import img4_web from '../assets/images/images-couple/web/irv-son-4-web.jpg';
@@ -18,6 +17,7 @@ import img6_mobile from '../assets/images/images-couple/mobile/irv-son-6-mobile.
 
 import { useEffect, useRef, useState } from 'react';
 import Logo from '../components/Logo';
+import { loaderStore } from '../components/Loader';
 
 const imagesArray = [
   { lowRes: img1_web, highRes: img1_mobile },
@@ -81,6 +81,8 @@ export default function PhotosAnimation() {
   const sectionRef = useRef<number>(0);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const loaderstore = loaderStore();
+  const isFirstImageLoaded = useRef(false);
 
   const scroll = () => {
     if (!imageRef.current) return;
@@ -89,20 +91,37 @@ export default function PhotosAnimation() {
       scrollPosition / (viewportHeight / imagesArray.length),
     );
 
-    if (section !== sectionRef.current && section < imagesArray.length) {
+    if (
+      section !== sectionRef.current &&
+      section >= 0 &&
+      section < imagesArray.length
+    ) {
       sectionRef.current = section;
       const image = imagesArray[sectionRef.current];
       imageRef.current.src = image.lowRes;
+
       const highResImage = new Image();
       highResImage.src = image.highRes;
+
       highResImage.onload = () => {
-        console.log('loaded');
         if (imageRef.current) {
           imageRef.current.src = image.highRes;
         }
       };
     }
   };
+
+  useEffect(() => {
+    loaderstore.addPromise(
+      new Promise((resolve) => {
+        if (isFirstImageLoaded.current) {
+          resolve(true);
+        }
+      }),
+
+      'PhotosAnimation-scroll',
+    );
+  }, [isFirstImageLoaded.current]);
 
   useEffect(() => {
     document.addEventListener('scroll', scroll);
@@ -116,6 +135,8 @@ export default function PhotosAnimation() {
         setViewportHeight(window.innerHeight),
       );
     };
+
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -137,6 +158,9 @@ export default function PhotosAnimation() {
             className="proposal-img fade-in"
             alt={`imagen-${sectionRef.current}`}
             src={imagesArray[sectionRef.current].lowRes}
+            onLoad={() => {
+              isFirstImageLoaded.current = true;
+            }}
           />
         </div>
       </div>

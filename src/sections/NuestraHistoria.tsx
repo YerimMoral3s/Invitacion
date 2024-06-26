@@ -2,7 +2,7 @@ import Container from '../components/Container';
 
 import Text from '../components/Text';
 
-import img from '../assets/images/irv-son-1.jpg';
+import img from '../assets/images/images-couple/web/irv-son-1-web.jpg';
 
 import styled from 'styled-components';
 import { colors } from '../assets/theme';

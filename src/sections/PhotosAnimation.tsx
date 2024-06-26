@@ -1,16 +1,32 @@
 import styled from 'styled-components';
 import { colors } from '../assets/theme';
-import img1 from '../assets/images/irv-son-1.jpg';
-import img2 from '../assets/images/irv-son-2.jpg';
-import img3 from '../assets/images/irv-son-3.jpg';
-import img4 from '../assets/images/irv-son-4.jpg';
-import img5 from '../assets/images/irv-son-5.jpg';
-import img6 from '../assets/images/irv-son-6.jpg';
+// images for web (lowRes)
+import img1_web from '../assets/images/images-couple/web/irv-son-1-web.jpg';
+// import img1_web from '../assets/images/images-couple/web/i|rv-son-1-web.jpg';
+import img2_web from '../assets/images/images-couple/web/irv-son-2-web.jpg';
+import img3_web from '../assets/images/images-couple/web/irv-son-3-web.jpg';
+import img4_web from '../assets/images/images-couple/web/irv-son-4-web.jpg';
+import img5_web from '../assets/images/images-couple/web/irv-son-5-web.jpg';
+import img6_web from '../assets/images/images-couple/web/irv-son-6-web.jpg';
+// images for mobile (highRes)
+import img1_mobile from '../assets/images/images-couple/mobile/irv-son-1-mobile.jpg';
+import img2_mobile from '../assets/images/images-couple/mobile/irv-son-2-mobile.jpg';
+import img3_mobile from '../assets/images/images-couple/mobile/irv-son-3-mobile.jpg';
+import img4_mobile from '../assets/images/images-couple/mobile/irv-son-4-mobile.jpg';
+import img5_mobile from '../assets/images/images-couple/mobile/irv-son-5-mobile.jpg';
+import img6_mobile from '../assets/images/images-couple/mobile/irv-son-6-mobile.jpg';
 
 import { useEffect, useRef, useState } from 'react';
 import Logo from '../components/Logo';
 
-const imagesArray = [img1, img2, img3, img4, img5, img6];
+const imagesArray = [
+  { lowRes: img1_web, highRes: img1_mobile },
+  { lowRes: img2_web, highRes: img2_mobile },
+  { lowRes: img3_web, highRes: img3_mobile },
+  { lowRes: img4_web, highRes: img4_mobile },
+  { lowRes: img5_web, highRes: img5_mobile },
+  { lowRes: img6_web, highRes: img6_mobile },
+];
 
 const StyledPhotosAnimation = styled.section`
   position: relative;
@@ -75,7 +91,16 @@ export default function PhotosAnimation() {
 
     if (section !== sectionRef.current && section < imagesArray.length) {
       sectionRef.current = section;
-      imageRef.current.src = imagesArray[sectionRef.current];
+      const image = imagesArray[sectionRef.current];
+      imageRef.current.src = image.lowRes;
+      const highResImage = new Image();
+      highResImage.src = image.highRes;
+      highResImage.onload = () => {
+        console.log('loaded');
+        if (imageRef.current) {
+          imageRef.current.src = image.highRes;
+        }
+      };
     }
   };
 
@@ -110,8 +135,8 @@ export default function PhotosAnimation() {
           <img
             ref={imageRef}
             className="proposal-img fade-in"
-            alt={`imagen-${imagesArray[sectionRef.current]}`}
-            src={imagesArray[sectionRef.current]}
+            alt={`imagen-${sectionRef.current}`}
+            src={imagesArray[sectionRef.current].lowRes}
           />
         </div>
       </div>

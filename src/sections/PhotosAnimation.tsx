@@ -8,7 +8,6 @@ import img4_web from '../assets/images/images-couple/web/irv-son-4-web.jpg';
 import img5_web from '../assets/images/images-couple/web/irv-son-5-web.jpg';
 import img6_web from '../assets/images/images-couple/web/irv-son-6-web.jpg';
 // images for mobile (highRes)
-import img1_mobile from '../assets/images/images-couple/mobile/irv-son-1-mobile.jpg';
 import img2_mobile from '../assets/images/images-couple/mobile/irv-son-2-mobile.jpg';
 import img3_mobile from '../assets/images/images-couple/mobile/irv-son-3-mobile.jpg';
 import img4_mobile from '../assets/images/images-couple/mobile/irv-son-4-mobile.jpg';
@@ -20,12 +19,12 @@ import Logo from '../components/Logo';
 import { loaderStore } from '../components/Loader';
 
 const imagesArray = [
-  { lowRes: img1_web, highRes: img1_mobile },
-  { lowRes: img2_web, highRes: img2_mobile },
-  { lowRes: img3_web, highRes: img3_mobile },
-  { lowRes: img4_web, highRes: img4_mobile },
-  { lowRes: img5_web, highRes: img5_mobile },
-  { lowRes: img6_web, highRes: img6_mobile },
+  { lowRes: img1_web, highRes: img1_web },
+  { lowRes: img2_mobile, highRes: img2_web },
+  { lowRes: img3_mobile, highRes: img3_web },
+  { lowRes: img4_mobile, highRes: img4_web },
+  { lowRes: img5_mobile, highRes: img5_web },
+  { lowRes: img6_mobile, highRes: img6_web },
 ];
 
 const StyledPhotosAnimation = styled.section`

@@ -44,7 +44,6 @@ const StyledForm = styled.form`
 
 export default function Form() {
   const { data: user, error, isLoading } = useUser();
-  console.log('user', user, error, isLoading);
   const acceptInvitationMutation = useAcceptInvitation();
   const declineInvitationMutation = useDeclineInvitation();
   const updateSubGuest = useUpdateSubGuest();

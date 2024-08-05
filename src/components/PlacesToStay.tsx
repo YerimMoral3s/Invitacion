@@ -7,6 +7,7 @@ import Letter from './Letter';
 import Tel from './Tel';
 import Hotel from './Hotel';
 import Resort from './Resort';
+import { Place, url, usePlaces } from './Sdk';
 
 const StyledPlacesToStay = styled.div`
   width: 100%;
@@ -27,36 +28,16 @@ const StyledPlacesToStay = styled.div`
   }
 `;
 
-type place = {
-  // name: 'Hotel 1';
-  name: string;
-  // image: 'https://via.placeholder.com/150';
-  image: string;
-  // website: 'https://www.google.com';
-  website: string;
-  // address: 'Dirección 1';
-  address?: string;
-  // phone: '1234567890';
-  phone?: string;
-  // email: 'email@test.com';
-  email?: string;
-  // airbnb: 'https://www.airbnb.com',
-  airbnb?: string;
-  // type: 'hotel',
-  type?: 'hotel' | 'resort';
-  // | 'hostel' | 'cabin' | 'camping' | 'other';
-};
+export default function PlacesToStay() {
+  const { data: places, error, isLoading } = usePlaces();
 
-type PlacesToStayProps = {
-  places: place[];
-} & React.HTMLAttributes<HTMLHeadingElement>;
+  if (!places || error || isLoading) return null;
 
-export default function PlacesToStay(props: PlacesToStayProps) {
   return (
     <StyledPlacesToStay>
-      {props.places.map((place, idx) => (
-        <Place
-          key={place.name.replace(/\s/g, '') + '_' + idx}
+      {places.map((place, idx) => (
+        <PlaceComponent
+          key={place.attributes.name.replace(/\s/g, '') + '_' + idx}
           place={place}
           className={idx % 2 === 0 ? 'even' : 'odd'}
         />
@@ -74,16 +55,16 @@ const StyledPlace = styled.div`
 `;
 
 type PlaceProps = {
-  place: place;
+  place: Place;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const Place = (props: PlaceProps) => {
+const PlaceComponent = (props: PlaceProps) => {
   return (
     <StyledPlace
       style={{
         height: '500px',
         width: '100%',
-        backgroundImage: `url(${props.place.image})`,
+        backgroundImage: `url(${url + props.place.attributes.image.data.attributes.url})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -97,21 +78,20 @@ const Place = (props: PlaceProps) => {
           height: '100%',
         }}
       >
-        {props.place.type ? (
-          <>
-            {props.place.type === 'hotel' ? (
-              <Hotel width="50px" height="50px" />
-            ) : null}
+        {/* chech if odd */}
+        {props.place.id % 2 === 1 ? (
+          <Hotel width="50px" height="50px" />
+        ) : (
+          <Resort width="40px" height="40px" />
+        )}
 
-            {props.place.type === 'resort' ? (
-              <Resort width="40px" height="40px" />
-            ) : null}
-          </>
-        ) : null}
+        <Text
+          text={props.place.attributes.name}
+          as="h3"
+          style={{ color: 'white' }}
+        />
 
-        <Text text={props.place.name} as="h3" style={{ color: 'white' }} />
-
-        {props.place.email && (
+        {props.place.attributes.email && (
           <div
             style={{
               display: 'flex',
@@ -120,9 +100,9 @@ const Place = (props: PlaceProps) => {
             }}
           >
             <Letter width="30px" height="30px" />
-            <a href={`mailto:${props.place.email}`}>
+            <a href={`mailto:${props.place.attributes.email}`}>
               <Text
-                text={props.place.email}
+                text={props.place.attributes.email}
                 as="p"
                 style={{ color: 'white', margin: '0 0 0 10px' }}
               />
@@ -130,7 +110,7 @@ const Place = (props: PlaceProps) => {
           </div>
         )}
 
-        {props.place.phone && (
+        {props.place.attributes.phone && (
           <div
             style={{
               display: 'flex',
@@ -139,9 +119,9 @@ const Place = (props: PlaceProps) => {
             }}
           >
             <Tel width="30px" height="30px" />
-            <a href={`tel:${props.place.phone}`}>
+            <a href={`tel:${props.place.attributes.phone}`}>
               <Text
-                text={props.place.phone}
+                text={props.place.attributes.phone}
                 as="p"
                 style={{ color: 'white', margin: '0 0 0 10px' }}
               />
@@ -149,10 +129,10 @@ const Place = (props: PlaceProps) => {
           </div>
         )}
 
-        {props.place.address && (
+        {props.place.attributes.address && (
           <Button
             text={'Ver dirección'}
-            href={props.place.address}
+            href={props.place.attributes.address}
             target="_blank"
             style={{
               textAlign: 'center',
@@ -162,10 +142,10 @@ const Place = (props: PlaceProps) => {
           />
         )}
 
-        {props.place.website && (
+        {props.place.attributes.website && (
           <Button
             text={'Ver sitio web'}
-            href={props.place.website}
+            href={props.place.attributes.website}
             target="_blank"
             style={{
               textAlign: 'center',
@@ -174,10 +154,10 @@ const Place = (props: PlaceProps) => {
           />
         )}
 
-        {props.place.airbnb && (
+        {props.place.attributes.airbnb && (
           <Button
             text={'Ver en Airbnb'}
-            href={props.place.airbnb}
+            href={props.place.attributes.airbnb}
             target="_blank"
             style={{
               textAlign: 'center',

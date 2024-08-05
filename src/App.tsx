@@ -181,33 +181,6 @@ const places = [
   {
     // hoteles y hospedajes
     name: 'PlacesToStay',
-    places: [
-      {
-        name: 'Hotel 1',
-        image: 'https://picsum.photos/500',
-        address: 'Dirección 1',
-        phone: '1234567890',
-        email: 'email@test.com',
-        website: 'https://www.google.com',
-        airbnb: 'https://www.airbnb.com',
-        type: 'hotel',
-      },
-      {
-        name: 'Hotel 2',
-        image: 'https://picsum.photos/500',
-        address: 'Dirección 2',
-        phone: '1234567890',
-        website: 'https://www.google.com',
-        type: 'resort',
-      },
-      {
-        name: 'Hotel 3',
-        image: 'https://picsum.photos/500',
-        address: 'Dirección 3',
-        email: 'email@test.com',
-        type: 'resort',
-      },
-    ],
   },
   {
     name: 'MainTitle',

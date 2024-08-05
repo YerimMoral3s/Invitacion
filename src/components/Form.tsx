@@ -69,8 +69,6 @@ export default function Form() {
   const errorOnSubmit =
     acceptInvitationMutation.isError || declineInvitationMutation.isError;
 
-  console.log('errorOnSubmit', errorOnSubmit);
-
   return (
     <StyledForm>
       <Container>

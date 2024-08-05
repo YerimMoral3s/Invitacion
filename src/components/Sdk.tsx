@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-const url = 'http://localhost:1337/api/';
+export const url = 'http://localhost:1337';
 
 // Función para obtener el usuario
 const fetchUser = async () => {
@@ -10,7 +10,7 @@ const fetchUser = async () => {
     console.log('No id provided');
   }
 
-  const response = await fetch(`${url}guests/${id}?populate=*`);
+  const response = await fetch(`${url}/api/guests/${id}?populate=*`);
   const user: ApiResponse = await response.json();
 
   if (user.error) {
@@ -55,10 +55,9 @@ const acceptInvitation = async (user: User) => {
     body: raw,
   };
 
-  const response = await fetch(`${url}confirmAssistance`, requestOptions);
+  const response = await fetch(`${url}/api/confirmAssistance`, requestOptions);
   if (response.status !== 200) {
-    console.log('Failed to update user');
-    return;
+    throw new Error('Failed to update user, acceptInvitation');
   }
 
   const updatedUser = await response.json();
@@ -102,9 +101,9 @@ const declineInvitation = async (user: User) => {
     body: raw,
   };
 
-  const response = await fetch(`${url}confirmAssistance`, requestOptions);
+  const response = await fetch(`${url}/api/confirmAssistance`, requestOptions);
   if (response.status !== 200) {
-    throw new Error('Failed to update user');
+    throw new Error('Failed to update user, declineInvitation');
   }
 
   const updatedUser = await response.json();
@@ -136,12 +135,31 @@ export const useDeclineInvitation = () => {
     },
   });
 };
+// getPlaces from api
+export const getPlaces = async () => {
+  const response = await fetch(`${url}/api/places?populate=*`);
+  const data: ApiResponsePlaces = await response.json();
 
-interface UpdateSubGuestVariables {
+  if (data.error) {
+    console.log('Failed to fetch places');
+    throw new Error('Failed to fetch places');
+  }
+
+  return data.data;
+};
+// Hook to get places
+export const usePlaces = () => {
+  return useQuery({
+    queryKey: ['places'],
+    queryFn: getPlaces,
+  });
+};
+
+type UpdateSubGuestVariables = {
   subGuest: SubGuest;
   checked: boolean;
   user: User;
-}
+};
 
 // Función para actualizar subinvitados
 export const useUpdateSubGuest = () => {
@@ -206,10 +224,84 @@ export type ErrorResponse = {
   details: Record<string, unknown>;
 };
 
-export type SuccessResponse = {
+export type ApiResponse = {
   data: User;
   meta: Record<string, unknown>;
   error: ErrorResponse;
 };
+export type ImageFormat = {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path: string | null;
+  size: number;
+  width: number;
+  height: number;
+  sizeInBytes: number;
+};
 
-export type ApiResponse = SuccessResponse;
+export type ImageAttributes = {
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number;
+  height: number;
+  formats: {
+    thumbnail: ImageFormat;
+  };
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ImageData = {
+  id: number;
+  attributes: ImageAttributes;
+};
+
+export type Image = {
+  data: ImageData;
+};
+
+export type PlaceAttributes = {
+  name: string;
+  address: string;
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+  airbnb: string | null;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image: Image;
+};
+
+export type Place = {
+  id: number;
+  attributes: PlaceAttributes;
+};
+
+export type PaginationMeta = {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
+};
+
+export type Meta = {
+  pagination: PaginationMeta;
+};
+
+export type ApiResponsePlaces = {
+  data: Place[];
+  meta: Meta;
+  error: ErrorResponse;
+};

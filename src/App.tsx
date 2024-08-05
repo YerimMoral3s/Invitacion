@@ -11,7 +11,10 @@ import icon4 from './assets/images/iglesia.png';
 import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
 import { Loader } from './components/Loader';
-import { useSDK } from './components/Sdk';
+// import { useSDK } from './components/Sdk';
+// import Separator from './components/Separator';
+
+import { useUser } from './components/Sdk';
 import Separator from './components/Separator';
 
 const CivilObjects = [
@@ -249,7 +252,8 @@ const obj2 = [
 ];
 
 function App() {
-  const user = useSDK((state) => state.user);
+  const { data: user } = useUser();
+
   const getTile = () => {
     if (user) {
       return `¡Muchas Gracias!`;

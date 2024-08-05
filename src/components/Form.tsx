@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import Container from './Container';
 import Text from './Text';
-import { SubGuest, useSDK } from './Sdk';
-import { useCallback, useEffect } from 'react';
+
 import { colors } from '../assets/theme';
-import { loaderStore } from './Loader';
+import {
+  SubGuest,
+  useAcceptInvitation,
+  useDeclineInvitation,
+  useUpdateSubGuest,
+  useUser,
+} from './Sdk';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -37,77 +42,44 @@ const StyledForm = styled.form`
   }
 `;
 
-type UrlParams = {
-  [key: string]: string;
-};
-
-const getUrlParams = <T extends UrlParams>(): T => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const result = {} as T;
-
-  urlParams.forEach((value, key) => {
-    result[key as keyof T] = value as T[keyof T];
-  });
-
-  return result;
-};
-
 export default function Form() {
-  const sdk = useSDK();
-  const loaderstore = loaderStore();
-  const getUser = useCallback(async () => {
-    const params = getUrlParams<{ id?: string }>();
+  const { data: user, error, isLoading } = useUser();
+  console.log('user', user, error, isLoading);
+  const acceptInvitationMutation = useAcceptInvitation();
+  const declineInvitationMutation = useDeclineInvitation();
+  const updateSubGuest = useUpdateSubGuest();
 
-    if (!params.id) {
-      return;
+  if (!user || error || isLoading) return null;
+
+  const handleAcceptInvitation = () => {
+    if (user) {
+      acceptInvitationMutation.mutate(user);
     }
+  };
 
-    await sdk.getUser(params.id);
-  }, []);
-
-  useEffect(() => {
-    getUser();
-    loaderstore.addPromise(getUser(), 'form-getUser');
-  }, [getUser]);
+  const handleDeclineInvitation = () => {
+    if (user) {
+      declineInvitationMutation.mutate(user);
+    }
+  };
 
   const onChangeCheckbox = async (subGuest: SubGuest, checked: boolean) => {
-    const updatedSubGuest = {
-      ...subGuest,
-      attributes: { ...subGuest.attributes, confirmation: checked },
-    };
+    console.log('user', ['user']);
 
-    sdk.updateSubGuest(updatedSubGuest);
-  };
-
-  if (!sdk.user) {
-    return null;
-  }
-
-  const onSubmit = async () => {
-    console.log('submit', { ...sdk });
-
-    loaderstore.addPromise(sdk.acceptInvitation(), 'form-acceptInvitation');
-  };
-
-  const onDecline = async () => {
-    loaderstore.addPromise(sdk.declineInvitation(), 'form-declineInvitation');
+    updateSubGuest({ subGuest, checked, user });
   };
 
   return (
-    <StyledForm
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit();
-      }}
-    >
+    <StyledForm>
       <Container>
         <Text
-          text={`!Hola ${sdk.user.attributes.name}!, para poder confirmar tu asistencia, es importante que nos indiques cuantas personas te van a acompañar`}
+          text={`¡Hola ${user.attributes.name}!, para poder confirmar tu asistencia, es importante que nos indiques cuántas personas te van a acompañar`}
         />
+
         <br />
-        <Text text="Por favor, indicanos quien de las siguientes personas te van a acompañar" />
+        <Text text="Por favor, indícanos quién de las siguientes personas te va a acompañar" />
         <div className="cheks-list">
-          {sdk.user.attributes.sub_guests.data.map((subGuest) => {
+          {user.attributes.sub_guests.data.map((subGuest) => {
             return (
               <SubGuestCheckbox
                 onChangeCheckbox={onChangeCheckbox}
@@ -121,8 +93,10 @@ export default function Form() {
       </Container>
 
       <div className="form-btns">
-        <button type="submit">Confirmar asistencia</button>
-        <button type="button" onClick={onDecline}>
+        <button type="button" onClick={handleAcceptInvitation}>
+          Confirmar asistencia
+        </button>
+        <button type="button" onClick={handleDeclineInvitation}>
           No podré asistir
         </button>
       </div>
@@ -143,7 +117,6 @@ const StyledSubGuestCheckbox = styled.label`
   background-color: ${colors.green};
   color: white;
   font-size: 14px;
-
   display: flex;
   align-items: center;
 `;

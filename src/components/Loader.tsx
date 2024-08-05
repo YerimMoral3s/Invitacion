@@ -2,6 +2,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { create } from 'zustand';
 import { colors } from '../assets/theme';
+import { useUser } from './Sdk';
 
 type LoaderState<T = unknown> = {
   isLoading: boolean;
@@ -27,9 +28,7 @@ export const loaderStore = create<LoaderState>((set) => ({
 
     promise.finally(() => {
       set((state) => {
-        console.log('state.promises: ', state.promises);
         const updatedPromises = state.promises.filter((p) => p.id !== id);
-        console.log('updatedPromises: ', updatedPromises);
         return {
           promises: updatedPromises,
           isLoading: updatedPromises.length > 0,
@@ -42,16 +41,13 @@ export const loaderStore = create<LoaderState>((set) => ({
 export const Loader = (props: PropsWithChildren) => {
   const [isVisible, setIsVisible] = useState(true);
   const loader = loaderStore();
+  const user = useUser();
 
-  // useEffect(() => {
-  //   const fakePromise = new Promise((resolve) => {
-  //     setTimeout(() => {
-  //       console.log('done');
-  //       resolve(true);
-  //     }, 3000);
-  //   });
-  //   loader.addPromise(fakePromise);
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      loader.addPromise(Promise.resolve(user), 'loader-getUser');
+    }
+  }, []);
 
   useEffect(() => {
     if (loader.isLoading) {

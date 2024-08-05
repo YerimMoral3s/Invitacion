@@ -18,13 +18,11 @@ const fetchUser = async () => {
   }
   return user.data;
 };
-
 // Hook para obtener el id de los parametros
 export const getUserId = () => {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('id');
 };
-
 // Hook para obtener el usuario
 export const useUser = () => {
   const userid = getUserId();
@@ -37,7 +35,6 @@ export const useUser = () => {
     staleTime: 0,
   });
 };
-
 // Función para aceptar invitación
 const acceptInvitation = async (user: User) => {
   const myHeaders = new Headers();
@@ -68,6 +65,23 @@ const acceptInvitation = async (user: User) => {
   return updatedUser.data;
 };
 
+// Hook para aceptar invitación
+export const useAcceptInvitation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: acceptInvitation,
+    onMutate: async (user: User) => {
+      queryClient.setQueryData(['user'], {
+        ...user,
+        attributes: { ...user.attributes, confirmation: true },
+      });
+    },
+    onError: (error) => {
+      console.log('Error', error);
+      return 'Algo salió mal, por favor intenta de nuevo';
+    },
+  });
+};
 // Función para rechazar invitación
 const declineInvitation = async (user: User) => {
   const myHeaders = new Headers();
@@ -95,24 +109,6 @@ const declineInvitation = async (user: User) => {
 
   const updatedUser = await response.json();
   return updatedUser.data;
-};
-
-// Hook para aceptar invitación
-export const useAcceptInvitation = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: acceptInvitation,
-    onMutate: async (user: User) => {
-      queryClient.setQueryData(['user'], {
-        ...user,
-        attributes: { ...user.attributes, confirmation: true },
-      });
-    },
-    onError: (error) => {
-      console.log('Error', error);
-      return 'Algo salió mal, por favor intenta de nuevo';
-    },
-  });
 };
 // Hook para rechazar invitación
 export const useDeclineInvitation = () => {

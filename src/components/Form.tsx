@@ -66,6 +66,11 @@ export default function Form() {
     updateSubGuest({ subGuest, checked, user });
   };
 
+  const errorOnSubmit =
+    acceptInvitationMutation.isError || declineInvitationMutation.isError;
+
+  console.log('errorOnSubmit', errorOnSubmit);
+
   return (
     <StyledForm>
       <Container>
@@ -96,6 +101,15 @@ export default function Form() {
         <button type="button" onClick={handleDeclineInvitation}>
           No podré asistir
         </button>
+      </div>
+
+      <div>
+        <Text
+          style={{
+            color: errorOnSubmit ? 'red' : 'transparent',
+          }}
+          text="Algo salió mal, por favor intenta de nuevo"
+        />
       </div>
     </StyledForm>
   );

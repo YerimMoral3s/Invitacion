@@ -108,10 +108,9 @@ export const useAcceptInvitation = () => {
         attributes: { ...user.attributes, confirmation: true },
       });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['user'],
-      });
+    onError: (error) => {
+      console.log('Error', error);
+      return 'Algo salió mal, por favor intenta de nuevo';
     },
   });
 };
@@ -123,13 +122,21 @@ export const useDeclineInvitation = () => {
     onMutate: async (user: User) => {
       queryClient.setQueryData(['user'], {
         ...user,
-        attributes: { ...user.attributes, confirmation: false },
+        attributes: {
+          ...user.attributes,
+          confirmation: false,
+          sub_guests: {
+            data: user.attributes.sub_guests.data.map((sg) => ({
+              ...sg,
+              attributes: { ...sg.attributes, confirmation: false },
+            })),
+          },
+        },
       });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['user'],
-      });
+    onError: (error) => {
+      console.log('Error', error);
+      return 'Algo salió mal, por favor intenta de nuevo';
     },
   });
 };

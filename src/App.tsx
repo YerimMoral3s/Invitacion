@@ -12,10 +12,21 @@ import logoLiverpool from './assets/images/liverpool.png';
 import logoPalacio from './assets/images/palacio.png';
 import { Loader } from './components/Loader';
 // import { useSDK } from './components/Sdk';
-// import Separator from './components/Separator';
+// import Separator from './components/Separator'
 
 import { useUser } from './components/Sdk';
 import Separator from './components/Separator';
+
+import irvinYSon1 from './assets/images/irvYson/1.jpeg';
+import irvinYSon3 from './assets/images/irvYson/3.jpeg';
+import irvinYSon4 from './assets/images/irvYson/4.jpeg';
+import irvinYSon5 from './assets/images/irvYson/6.jpeg';
+import irvinYSon7 from './assets/images/irvYson/7.jpeg';
+import irvinYSon8 from './assets/images/irvYson/8.jpeg';
+import irvinYSon9 from './assets/images/irvYson/9.jpeg';
+import irvinYSon10 from './assets/images/irvYson/10.jpeg';
+import irvinYSon17 from './assets/images/irvYson/17.jpeg';
+import irvinYSon18 from './assets/images/irvYson/18.jpeg';
 
 const CivilObjects = [
   {
@@ -151,13 +162,16 @@ const obj1 = [
   {
     name: 'Gallery',
     images: [
-      'https://picsum.photos/900/1200?random=1',
-      'https://picsum.photos/1000?random=2',
-      'https://picsum.photos/1000?random=3',
-      'https://picsum.photos/1000/1200?random=4',
-      'https://picsum.photos/600/500?random=5',
-      'https://picsum.photos/1000?random=6',
-      'https://picsum.photos/1200/900?random=7',
+      irvinYSon1,
+      irvinYSon3,
+      irvinYSon4,
+      irvinYSon5,
+      irvinYSon7,
+      irvinYSon8,
+      irvinYSon9,
+      irvinYSon10,
+      irvinYSon17,
+      irvinYSon18,
     ],
   },
   {

@@ -63,8 +63,6 @@ export default function Form() {
   };
 
   const onChangeCheckbox = async (subGuest: SubGuest, checked: boolean) => {
-    console.log('user', ['user']);
-
     updateSubGuest({ subGuest, checked, user });
   };
 

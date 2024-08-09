@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-export const url = 'http://localhost:1337';
+// export const url = 'http://localhost:1337';
+export const url = 'https://server-is.wip-mx.com';
 
 // Función para obtener el usuario
 const fetchUser = async () => {

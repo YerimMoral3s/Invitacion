@@ -147,7 +147,6 @@ export default function PhotosAnimation() {
             width={600}
             height={600}
             fill={colors.white}
-            stroke={colors.white}
           />
         </div>
 

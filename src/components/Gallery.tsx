@@ -2,6 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from './Container';
 
+import irvinYSon1 from './assets/images/irvYson/1.jpeg';
+import irvinYSon3 from './assets/images/irvYson/3.jpeg';
+import irvinYSon4 from './assets/images/irvYson/4.jpeg';
+import irvinYSon5 from './assets/images/irvYson/6.jpeg';
+import irvinYSon7 from './assets/images/irvYson/7.jpeg';
+import irvinYSon8 from './assets/images/irvYson/8.jpeg';
+import irvinYSon9 from './assets/images/irvYson/9.jpeg';
+import irvinYSon10 from './assets/images/irvYson/10.jpeg';
+import irvinYSon17 from './assets/images/irvYson/17.jpeg';
+import irvinYSon18 from './assets/images/irvYson/18.jpeg';
+
 const StyledGallery = styled.div`
   width: 100%;
 
@@ -53,9 +64,18 @@ const StyledGallery = styled.div`
   }
 `;
 
-type GalleryProps = {
-  images: string[];
-} & React.HTMLAttributes<HTMLHeadingElement>;
+const images = [
+  irvinYSon1,
+  irvinYSon3,
+  irvinYSon4,
+  irvinYSon5,
+  irvinYSon7,
+  irvinYSon8,
+  irvinYSon9,
+  irvinYSon10,
+  irvinYSon17,
+  irvinYSon18,
+];
 
 type card = {
   span: string;
@@ -63,23 +83,23 @@ type card = {
   className: string;
 };
 
-export default function Gallery(props: GalleryProps) {
+export default function Gallery() {
   const [cards, setCards] = useState<card[]>([]);
   const [fullImage, setFullImage] = useState<string | null>(null);
 
   useEffect(() => {
     const cardData: card[] = [];
 
-    for (let n = 0; n < props.images.length; n++) {
+    for (let n = 0; n < images.length; n++) {
       const span =
         weightedRand({ 1: 0.2, 2: 0.2, 3: 0.2, 4: 0.2, 5: 0.2 }) || '1';
-      const url = props.images[n];
+      const url = images[n];
       const className = `c-${weightedRand({ 1: 0.2, 2: 0.2, 3: 0.2, 4: 0.2, 5: 0.2 })}`;
       cardData.push({ span, url, className });
     }
 
     setCards(cardData);
-  }, [props.images]);
+  }, []);
 
   useEffect(() => {
     if (fullImage) {

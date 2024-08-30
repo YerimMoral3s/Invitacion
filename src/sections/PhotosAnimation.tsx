@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../assets/theme';
+import { colors } from '../components/theme';
 // images for web (lowRes)
 import img1_web from '../assets/images/images-couple/web/irv-son-1-web.jpg';
 import img2_web from '../assets/images/images-couple/web/irv-son-2-web.jpg';

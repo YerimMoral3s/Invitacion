@@ -1,5 +1,6 @@
 import { Loader } from './components/Loader';
 import NosCasamos from './components/NosCasamos';
+import Nosotros from './components/Nosotros';
 import PhotosAnimation from './sections/PhotosAnimation';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <Loader>
       <PhotosAnimation />
       <NosCasamos />
+      <Nosotros />
     </Loader>
   );
 }

@@ -7,18 +7,14 @@ const StyledContainer = styled.div`
 
   width: 100%;
 
-  @media (min-width: 576px) {
+  @media (min-width: 768px) {
     width: 90%;
 
     padding: 1rem 0;
   }
 
-  @media (min-width: 768px) {
-    width: 80%;
-  }
-
   @media (min-width: 992px) {
-    width: 70%;
+    width: 80%;
   }
 `;
 

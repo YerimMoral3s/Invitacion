@@ -4,7 +4,7 @@ import { colors } from './theme';
 const Styled = styled.div`
   font-family: 'Noto Serif', sans-serif;
   text-align: center;
-  padding: 10px;
+  padding: 1rem;
   font-size: 2rem;
   font-style: italic;
   background: ${colors.cream};

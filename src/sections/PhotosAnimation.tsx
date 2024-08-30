@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 import { colors } from '../components/theme';
 // images for web (lowRes)
-import img1_web from '../assets/images/images-couple/web/irv-son-1-web.jpg';
-import img2_web from '../assets/images/images-couple/web/irv-son-2-web.jpg';
-import img3_web from '../assets/images/images-couple/web/irv-son-3-web.jpg';
-import img4_web from '../assets/images/images-couple/web/irv-son-4-web.jpg';
-import img5_web from '../assets/images/images-couple/web/irv-son-5-web.jpg';
-import img6_web from '../assets/images/images-couple/web/irv-son-6-web.jpg';
+import img1_web from '../assets/images-couple/web/irv-son-1-web.jpg';
+import img2_web from '../assets/images-couple/web/irv-son-2-web.jpg';
+import img3_web from '../assets/images-couple/web/irv-son-3-web.jpg';
+import img4_web from '../assets/images-couple/web/irv-son-4-web.jpg';
+import img5_web from '../assets/images-couple/web/irv-son-5-web.jpg';
+import img6_web from '../assets/images-couple/web/irv-son-6-web.jpg';
 // images for mobile (highRes)
-import img2_mobile from '../assets/images/images-couple/mobile/irv-son-2-mobile.jpg';
-import img3_mobile from '../assets/images/images-couple/mobile/irv-son-3-mobile.jpg';
-import img4_mobile from '../assets/images/images-couple/mobile/irv-son-4-mobile.jpg';
-import img5_mobile from '../assets/images/images-couple/mobile/irv-son-5-mobile.jpg';
-import img6_mobile from '../assets/images/images-couple/mobile/irv-son-6-mobile.jpg';
+import img2_mobile from '../assets/images-couple/mobile/irv-son-2-mobile.jpg';
+import img3_mobile from '../assets/images-couple/mobile/irv-son-3-mobile.jpg';
+import img4_mobile from '../assets/images-couple/mobile/irv-son-4-mobile.jpg';
+import img5_mobile from '../assets/images-couple/mobile/irv-son-5-mobile.jpg';
+import img6_mobile from '../assets/images-couple/mobile/irv-son-6-mobile.jpg';
 
 import { useEffect, useRef, useState } from 'react';
 import Logo from '../components/Logo';

@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { create } from 'zustand';
-import { colors } from '../assets/theme';
+import { colors } from './theme';
 import { useUser } from './Sdk';
 
 type LoaderState<T = unknown> = {
@@ -117,7 +117,7 @@ const StyledLoader = styled.div`
     position: absolute;
     inset: 0px;
     margin: auto;
-    background: ${colors.gold};
+    background: ${colors.gray};
     animation: crlMugLoader 2s linear infinite alternate;
   }
 

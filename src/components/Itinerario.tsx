@@ -6,7 +6,7 @@ import { colors } from './theme';
 const StyledItinerario = styled.div`
   background: ${colors.cream};
   font-family: 'Montserrat', sans-serif;
-
+  color: ${colors.gray};
   h1,
   h2,
   h3 {
@@ -18,7 +18,7 @@ export default function Itinerario() {
   return (
     <StyledItinerario>
       <Container>
-        <h1 style={{ letterSpacing: '5px' }}>ITINERARIO</h1>
+        <h1 style={{ letterSpacing: '5px', fontSize: '3rem' }}>ITINERARIO</h1>
       </Container>
       <Date
         date="SABADO 01/18:30 HRS"
@@ -51,7 +51,7 @@ const StyledDateContainer = styled.div`
     padding: 0 1rem 0 0;
 
     h1 {
-      font-weight: 600;
+      font-weight: 500;
       margin: 1rem 0;
     }
   }
@@ -63,15 +63,18 @@ const StyledDateContainer = styled.div`
       background: ${colors.cream};
       margin: 1rem calc(1rem + 3px) 0 0;
       border: 1px solid ${colors.gray};
-      color: ${colors.gray};
+      letter-spacing: 2px;
     }
   }
 
   .dressCode {
     background: ${colors.gray};
-    color: ${colors.white};
+
     padding: 2rem;
     text-align: center;
+    h2 {
+      color: ${colors.white};
+    }
   }
 `;
 

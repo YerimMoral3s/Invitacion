@@ -23,6 +23,7 @@ export default function Itinerario() {
       <Date
         date="SABADO 01/18:30 HRS"
         ceremony="CEREMONIA CIVIL"
+        name="SALON DE EVENTOS AMARANTO"
         address="Av. Gobernador Alfredo del Mazo Mz. 76 Lt. 38, Villa de Guadalupe Xalostoc, Ecatepec de Morelos."
         a="https://maps.app.goo.gl/mtk1zwA3hEZNhh399"
         dressCode="DRESS CODE: COCTEL"
@@ -31,6 +32,7 @@ export default function Itinerario() {
         <Date
           date="SABADO 15/16:30 HRS"
           ceremony="CEREMONIA RELIGIOSA"
+          name="FINCA BY ALOFA"
           address="Av. López Mateos No. 1, Huaxtla, Jal."
           a="https://maps.app.goo.gl/VbupyS3sUY2ePacf6"
           dressCode="DRESS CODE: FORMAL"
@@ -64,6 +66,7 @@ const StyledDateContainer = styled.div`
       margin: 1rem calc(1rem + 3px) 0 0;
       border: 1px solid ${colors.gray};
       letter-spacing: 2px;
+      color: ${colors.gray};
     }
   }
 
@@ -82,6 +85,7 @@ type Date = {
   date: string;
   ceremony: string;
   address: string;
+  name: string;
   a: string;
   dressCode: string;
 };
@@ -92,7 +96,11 @@ const Date = (props: Date) => (
       <div className="box">
         <h2>{props.date}</h2>
         <h1>{props.ceremony}</h1>
-        <CopyToClipboard text={props.address} />
+        <h3 style={{ fontWeight: '600' }}>{props.name}</h3>
+        <CopyToClipboard
+          text={props.address}
+          copy={props.name + ' - ' + props.address}
+        />
       </div>
 
       <a href={props.a} target="_blank">
@@ -106,12 +114,12 @@ const Date = (props: Date) => (
   </StyledDateContainer>
 );
 
-const CopyToClipboard = ({ text }: { text: string }) => {
+const CopyToClipboard = ({ text, copy }: { text: string; copy: string }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(text)
+      .writeText(copy)
       .then(() => {
         setTooltipVisible(true);
         setTimeout(() => setTooltipVisible(false), 1500);

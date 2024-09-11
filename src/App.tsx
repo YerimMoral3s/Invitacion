@@ -1,4 +1,5 @@
 import Banner from './components/Banner';
+import Itinerario from './components/Itinerario';
 import { Loader } from './components/Loader';
 import NosCasamos from './components/NosCasamos';
 import Nosotros from './components/Nosotros';
@@ -11,6 +12,7 @@ function App() {
       <NosCasamos />
       <Nosotros />
       <Banner />
+      <Itinerario />
     </Loader>
   );
 }

@@ -1,4 +1,5 @@
 import Banner from './components/Banner';
+import Gallery from './components/Gallery';
 import GiftTable from './components/GiftTable';
 import Itinerario from './components/Itinerario';
 import { Loader } from './components/Loader';
@@ -15,6 +16,7 @@ function App() {
       <Banner />
       <Itinerario />
       <GiftTable />
+      <Gallery />
     </Loader>
   );
 }

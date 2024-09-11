@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from './Container';
 
-import irvinYSon1 from './assets/images/irvYson/1.jpeg';
-import irvinYSon3 from './assets/images/irvYson/3.jpeg';
-import irvinYSon4 from './assets/images/irvYson/4.jpeg';
-import irvinYSon5 from './assets/images/irvYson/6.jpeg';
-import irvinYSon7 from './assets/images/irvYson/7.jpeg';
-import irvinYSon8 from './assets/images/irvYson/8.jpeg';
-import irvinYSon9 from './assets/images/irvYson/9.jpeg';
-import irvinYSon10 from './assets/images/irvYson/10.jpeg';
-import irvinYSon17 from './assets/images/irvYson/17.jpeg';
-import irvinYSon18 from './assets/images/irvYson/18.jpeg';
+import irvinYSon1 from '../assets/irvYson/1.jpeg';
+import irvinYSon3 from '../assets/irvYson/3.jpeg';
+import irvinYSon4 from '../assets/irvYson/4.jpeg';
+import irvinYSon5 from '../assets/irvYson/6.jpeg';
+import irvinYSon7 from '../assets/irvYson/7.jpeg';
+import irvinYSon8 from '../assets/irvYson/8.jpeg';
+import irvinYSon9 from '../assets/irvYson/9.jpeg';
+import irvinYSon10 from '../assets/irvYson/10.jpeg';
+import irvinYSon17 from '../assets/irvYson/17.jpeg';
+import irvinYSon18 from '../assets/irvYson/18.jpeg';
+import { colors } from './theme';
 
 const StyledGallery = styled.div`
   width: 100%;
+
+  background: ${colors.cream};
 
   .grid {
     display: grid;
@@ -26,23 +29,23 @@ const StyledGallery = styled.div`
   }
 
   .c-1 {
-    background: #1a535c;
+    background: ${colors.cream};
   }
 
   .c-2 {
-    background: #4ecdc4;
+    background: ${colors.cream};
   }
 
   .c-3 {
-    background: #bfd7ea;
+    background: ${colors.cream};
   }
 
   .c-4 {
-    background: #ff6b6b;
+    background: ${colors.cream};
   }
 
   .c-5 {
-    background: #ffe66d;
+    background: ${colors.cream};
   }
 
   .card {
@@ -182,8 +185,8 @@ const StyledFullImage = styled.div`
   z-index: 100;
 
   img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 80%;
+    max-height: 80%;
     border: 5px solid white;
     border-radius: 10px;
   }

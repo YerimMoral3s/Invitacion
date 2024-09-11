@@ -1,3 +1,4 @@
+import Banner from './components/Banner';
 import { Loader } from './components/Loader';
 import NosCasamos from './components/NosCasamos';
 import Nosotros from './components/Nosotros';
@@ -9,6 +10,7 @@ function App() {
       <PhotosAnimation />
       <NosCasamos />
       <Nosotros />
+      <Banner />
     </Loader>
   );
 }

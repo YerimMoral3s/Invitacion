@@ -2,15 +2,13 @@ import { CSSProperties, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
-  padding: 1rem;
+  padding: 2rem 1rem;
   margin: 0 auto;
 
   width: 100%;
 
   @media (min-width: 768px) {
     width: 90%;
-
-    padding: 1rem 0;
   }
 
   @media (min-width: 992px) {

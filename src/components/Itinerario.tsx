@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import Container from './Container';
 import { colors } from './theme';
+import { CopyToClipboard } from './CopyToClipboard';
 
 const StyledItinerario = styled.div`
   background: ${colors.cream};
@@ -28,7 +28,7 @@ export default function Itinerario() {
         a="https://maps.app.goo.gl/mtk1zwA3hEZNhh399"
         dressCode="DRESS CODE: COCTEL"
       />
-      <div style={{ marginTop: '2rem' }}>
+      <div>
         <Date
           date="SABADO 15/16:30 HRS"
           ceremony="CEREMONIA RELIGIOSA"
@@ -96,11 +96,7 @@ const Date = (props: Date) => (
       <div className="box">
         <h2>{props.date}</h2>
         <h1>{props.ceremony}</h1>
-        <h3 style={{ fontWeight: '600' }}>{props.name}</h3>
-        <CopyToClipboard
-          text={props.address}
-          copy={props.name + ' - ' + props.address}
-        />
+        <CopyToClipboard text={props.address} name={props.name} />
       </div>
 
       <a href={props.a} target="_blank">
@@ -113,44 +109,3 @@ const Date = (props: Date) => (
     </div>
   </StyledDateContainer>
 );
-
-const CopyToClipboard = ({ text, copy }: { text: string; copy: string }) => {
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard
-      .writeText(copy)
-      .then(() => {
-        setTooltipVisible(true);
-        setTimeout(() => setTooltipVisible(false), 1500);
-      })
-      .catch((err) => {
-        console.error('Error al copiar el texto: ', err);
-      });
-  };
-
-  return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      <h3 onClick={handleCopy}>{text}</h3>
-      {tooltipVisible && (
-        <span
-          style={{
-            position: 'absolute',
-            bottom: '120%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: 'black',
-            color: 'white',
-            padding: '5px',
-            borderRadius: '4px',
-            fontSize: '12px',
-            whiteSpace: 'nowrap',
-            zIndex: '1',
-          }}
-        >
-          ¡Texto copiado!
-        </span>
-      )}
-    </div>
-  );
-};

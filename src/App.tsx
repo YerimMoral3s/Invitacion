@@ -1,6 +1,7 @@
 import Banner from './components/Banner';
 import Gallery from './components/Gallery';
 import GiftTable from './components/GiftTable';
+import Hospitalities from './components/Hospitalities';
 import Itinerario from './components/Itinerario';
 import { Loader } from './components/Loader';
 import NosCasamos from './components/NosCasamos';
@@ -17,6 +18,7 @@ function App() {
       <Itinerario />
       <GiftTable />
       <Gallery />
+      <Hospitalities />
     </Loader>
   );
 }

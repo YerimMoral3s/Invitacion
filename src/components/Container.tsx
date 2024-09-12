@@ -2,7 +2,7 @@ import { CSSProperties, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   margin: 0 auto;
 
   width: 100%;

@@ -24,7 +24,7 @@ const StyledGiftTable = styled.div`
 export default function GiftTable() {
   return (
     <StyledGiftTable>
-      <Container>
+      <Container style={{ paddingBottom: '0' }}>
         <h1>MESA DE REGALOS</h1>
         <div style={{ margin: '1rem 0' }}>
           <p>GRACIAS POR FORMAR PARTE DE </p>

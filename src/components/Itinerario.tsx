@@ -17,7 +17,7 @@ const StyledItinerario = styled.div`
 export default function Itinerario() {
   return (
     <StyledItinerario>
-      <Container>
+      <Container style={{ paddingBottom: '0' }}>
         <h1 style={{ letterSpacing: '5px', fontSize: '3rem' }}>ITINERARIO</h1>
       </Container>
       <Date

@@ -3,6 +3,8 @@ import Container from '../Container';
 import { colors } from '../theme';
 import Title from './hospitalities';
 import { CopyToClipboard } from '../CopyToClipboard';
+import BARUK from './BARUK.pdf';
+import BECQUER from './BECQUER.pdf';
 
 const StyledHospitalities = styled.div`
   background: ${colors.gray};
@@ -54,20 +56,23 @@ type HotelProps = {
   direccion: string;
   informacion: string;
   ubicacion: string;
+  telefono: string;
 };
 
 const BecquerHotel: HotelProps = {
   nombre: 'Becquer Hotel Guadalajara',
   direccion: 'Av. Guadalupe 596, Chapalita, Guadalajara, Jalisco.',
-  informacion: 'Información',
-  ubicacion: 'Ubicación',
+  informacion: BECQUER,
+  ubicacion: 'https://maps.app.goo.gl/YA7kWpKdBYpDAGLS6',
+  telefono: '3338351338',
 };
 
 const BarukHotel: HotelProps = {
   nombre: 'Baruk Hotel de Autor Guadalajara',
   direccion: 'Calz. Lázaro Cárdenas 3447, Chapalita, Guadalajara, Jalisco.',
-  informacion: 'Información',
-  ubicacion: 'Ubicación',
+  informacion: BARUK,
+  ubicacion: 'https://maps.app.goo.gl/a7uHCWhB8JCogLL8A',
+  telefono: '3331217893',
 };
 
 // transporte: {
@@ -80,7 +85,7 @@ export default function Hospitalities() {
     <StyledHospitalities>
       <Container>
         <Title />
-        <div className="line"></div>
+        <div style={{ marginTop: '2rem' }} className="line"></div>
         <Hosp hotel={BecquerHotel} />
         <div className="line"></div>
         <Hosp hotel={BarukHotel} />
@@ -104,16 +109,19 @@ const Hosp = ({ hotel }: { hotel: HotelProps }) => (
     <Container>
       <CopyToClipboard name={hotel.nombre} text={hotel.direccion} />
       <div className="btns-hotel">
-        <a href={hotel.ubicacion} target="_blank">
+        <a href={hotel.informacion} target="_blank">
           <button>INFORMACÍON</button>
         </a>
         <a href={hotel.ubicacion} target="_blank">
           <button>UBICACIÓN</button>
         </a>
-        <a href={hotel.ubicacion} target="_blank">
+        <a href={'tel:+' + hotel.ubicacion} target="_blank">
           <button>LLAMAR</button>
         </a>
       </div>
+      <span style={{ fontSize: '10px', marginTop: '2px' }}>
+        * Favor de revisar la información antes de hacer tu reservación
+      </span>
     </Container>
   </StyledHotel>
 );

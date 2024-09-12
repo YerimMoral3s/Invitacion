@@ -6,6 +6,7 @@ import Itinerario from './components/Itinerario';
 import { Loader } from './components/Loader';
 import NosCasamos from './components/NosCasamos';
 import Nosotros from './components/Nosotros';
+import Spoty from './components/Spoty';
 import PhotosAnimation from './sections/PhotosAnimation';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <GiftTable />
       <Gallery />
       <Hospitalities />
+      <Spoty />
     </Loader>
   );
 }

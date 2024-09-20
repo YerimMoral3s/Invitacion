@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Container from './Container';
 import { colors } from './theme';
-import { CopyToClipboard } from './CopyToClipboard';
+import { CopyToClipboard } from './copy';
 
 const StyledItinerario = styled.div`
   background: ${colors.cream};

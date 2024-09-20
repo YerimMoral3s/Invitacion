@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import Copy from './copy';
 
 export const CopyToClipboard = ({
   text,
-
   name,
+  position = 'left',
 }: {
   text: string;
-
   name: string;
+  position?: string;
 }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
@@ -28,6 +29,10 @@ export const CopyToClipboard = ({
       <div onClick={handleCopy}>
         <h3 style={{ fontWeight: '600' }}>{name}</h3>
         <h3>{text}</h3>
+
+        <div style={{ position: 'absolute', top: '-5px', [position]: '-5px' }}>
+          <Copy stroke="rgba(0,0,0, 0.8)" />
+        </div>
       </div>
 
       {tooltipVisible && (

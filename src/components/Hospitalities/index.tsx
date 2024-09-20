@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Container from '../Container';
 import { colors } from '../theme';
 import Title from './hospitalities';
-import { CopyToClipboard } from '../CopyToClipboard';
+import { CopyToClipboard } from '../copy';
 import BARUK from './BARUK.pdf';
 import BECQUER from './BECQUER.pdf';
 
@@ -107,7 +107,11 @@ const StyledHotel = styled.div``;
 const Hosp = ({ hotel }: { hotel: HotelProps }) => (
   <StyledHotel>
     <Container>
-      <CopyToClipboard name={hotel.nombre} text={hotel.direccion} />
+      <CopyToClipboard
+        name={hotel.nombre}
+        text={hotel.direccion}
+        position="right"
+      />
       <div className="btns-hotel">
         <a href={hotel.informacion} target="_blank">
           <button>INFORMACÍON</button>

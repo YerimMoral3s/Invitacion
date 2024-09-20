@@ -30,7 +30,7 @@ export const CopyToClipboard = ({
         <h3 style={{ fontWeight: '600' }}>{name}</h3>
         <h3>{text}</h3>
 
-        <div style={{ position: 'absolute', top: '-5px', [position]: '-5px' }}>
+        <div style={{ position: 'absolute', top: '0', [position]: '0' }}>
           <Copy stroke="rgba(0,0,0, 0.8)" />
         </div>
       </div>

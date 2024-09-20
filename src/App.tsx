@@ -1,4 +1,5 @@
 import Banner from './components/Banner';
+import Footer from './components/Footer';
 import Form from './components/Form';
 import Gallery from './components/Gallery';
 import GiftTable from './components/GiftTable';
@@ -23,6 +24,7 @@ function App() {
       <Hospitalities />
       <Spoty />
       <Form />
+      <Footer />
     </Loader>
   );
 }

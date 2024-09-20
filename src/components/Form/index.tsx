@@ -3,61 +3,6 @@ import Container from '../Container';
 import { colors } from '../theme';
 import Name from './Name';
 
-const StyledForm = styled.div`
-  background: ${colors.gray};
-  color: ${colors.white};
-  text-align: center;
-
-  h1 {
-    letter-spacing: 5px;
-  }
-
-  p {
-    margin: 2rem 0;
-  }
-
-  .names {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-  }
-  .confirm-container {
-    margin: 2rem 0 0 0;
-  }
-
-  .copy {
-    background: ${colors.cream};
-    color: ${colors.gray};
-    margin: 2rem 0 0 0;
-    padding: 1rem;
-    p {
-      border: 2px solid ${colors.gray};
-      padding: 1rem;
-      margin: 0;
-    }
-  }
-
-  .item-btns {
-    display: flex;
-    justify-content: space-evenly;
-    max-width: 500px;
-    margin: auto;
-    flex-wrap: wrap;
-
-    button {
-      background: ${colors.cream};
-      color: ${colors.gray};
-      letter-spacing: 5px;
-      padding: 0.8rem;
-      margin: 0.8rem;
-      border: 0;
-      border-radius: 10px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.8em;
-    }
-  }
-`;
-
 const names: string[] = [
   'dsua',
   'djasdsadsadassad',
@@ -143,3 +88,58 @@ export default function Form() {
     </StyledForm>
   );
 }
+
+const StyledForm = styled.div`
+  background: ${colors.gray};
+  color: ${colors.white};
+  text-align: center;
+
+  h1 {
+    letter-spacing: 5px;
+  }
+
+  p {
+    margin: 2rem 0;
+  }
+
+  .names {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .confirm-container {
+    margin: 2rem 0 0 0;
+  }
+
+  .copy {
+    background: ${colors.cream};
+    color: ${colors.gray};
+    margin: 2rem 0 0 0;
+    padding: 1rem;
+    p {
+      border: 2px solid ${colors.gray};
+      padding: 1rem;
+      margin: 0;
+    }
+  }
+
+  .item-btns {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 500px;
+    margin: auto;
+    flex-wrap: wrap;
+
+    button {
+      background: ${colors.cream};
+      color: ${colors.gray};
+      letter-spacing: 5px;
+      padding: 0.8rem;
+      margin: 0.8rem;
+      border: 0;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8em;
+    }
+  }
+`;

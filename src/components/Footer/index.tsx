@@ -5,22 +5,24 @@ import Flowers from './Flowers';
 
 const StyledFooter = styled.div`
   background: ${colors.cream};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .border {
-    border: 2px solid ${colors.gray};
-    padding: 1rem;
+    .border {
+      border: 2px solid ${colors.gray};
+      padding: 1rem;
 
-    font-family: 'Noto Serif', sans-serif;
-    text-align: center;
+      font-family: 'Noto Serif', sans-serif;
+      text-align: center;
 
-    font-size: 1rem;
-    font-style: italic;
-    background: ${colors.cream};
-    color: ${colors.gray};
-    margin: 0 0 10px 0;
+      font-size: 1rem;
+      font-style: italic;
+      background: ${colors.cream};
+      color: ${colors.gray};
+      margin: 0 0 10px 0;
+    }
   }
 `;
 

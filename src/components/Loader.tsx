@@ -2,7 +2,6 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { create } from 'zustand';
 import { colors } from './theme';
-import { useUser } from './Sdk';
 
 type LoaderState<T = unknown> = {
   isLoading: boolean;
@@ -41,13 +40,6 @@ export const loaderStore = create<LoaderState>((set) => ({
 export const Loader = (props: PropsWithChildren) => {
   const [isVisible, setIsVisible] = useState(true);
   const loader = loaderStore();
-  const user = useUser();
-
-  useEffect(() => {
-    if (user) {
-      loader.addPromise(Promise.resolve(user), 'loader-getUser');
-    }
-  }, []);
 
   useEffect(() => {
     if (loader.isLoading) {

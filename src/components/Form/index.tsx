@@ -2,90 +2,228 @@ import styled from 'styled-components';
 import Container from '../Container';
 import { colors } from '../theme';
 import Name from './Name';
+import {
+  updateSubGuestRequest,
+  useUpdateGuestAPI,
+  useUpdateGuestCache,
+  useUpdateUser,
+  useUser,
+} from '../sdk';
+import toast, { Toaster } from 'react-hot-toast';
 
-const names: string[] = [
-  'dsua',
-  'djasdsadsadassad',
-  'dadasdasdasdaskjh',
-  'dadasdasdasdaskjh',
-  'dadasdasdasdaskjh',
-  'dadasdasdasdaskjh',
-];
-
-const messages = {
-  both: '¡Nos alegra saber que podrás acompañarnos en nuestra ceremonia civil y religiosa! Gracias por confirmar tu asistencia, será un placer compartir este día tan especial contigo.',
-  civil:
-    'Gracias por confirmar tu asistencia a nuestra ceremonia civil. Lamentamos que no puedas acompañarnos en la ceremonia religiosa, pero estamos felices de poder compartir contigo en este momento tan significativo.',
-  religiosa:
-    'Nos alegra saber que podrás estar con nosotros en la ceremonia religiosa. Entendemos que no puedas asistir a la ceremonia civil, y agradecemos que nos lo hayas confirmado. Tu presencia en este momento sagrado es muy importante para nosotros.',
-  none: 'Lamentamos que no puedas acompañarnos en este día especial. Apreciamos que nos hayas informado, y aunque no estés presente físicamente, estarás en nuestros pensamientos. Gracias por tu consideración.',
-};
+import { useDebouncedCallback } from 'use-debounce';
+import { useRef } from 'react';
+import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
+import { SubGuest } from '../sdk/types';
 
 export default function Form() {
+  const user = useUser();
+  const update = useUpdateUser();
+  const loaderRef = useRef<LoadingBarRef>({} as LoadingBarRef);
+  const updateGuestCache = useUpdateGuestCache();
+  const updateGuestAPI = useUpdateGuestAPI();
+
+  const notifyError = () => toast.error('Algo Salio mal :(');
+  const notifySucces = () => toast.success('¡Guardado!');
+
+  const updateSubGuest = (subGuest: SubGuest) => {
+    if (!user.data?.attributes.sub_guests) {
+      return;
+    }
+    updateGuestCache.updateCache(subGuest, !subGuest.attributes.confirmation);
+    debouncedUpdate(user.data.attributes.sub_guests.data);
+  };
+
+  const debouncedUpdate = useDebouncedCallback(async (subGuest: SubGuest[]) => {
+    try {
+      if (!user.data) {
+        return;
+      }
+      loaderRef.current.continuousStart();
+      const data = subGuest.map((sg) => ({
+        id: sg.id,
+        confirmation: sg.attributes.confirmation,
+      }));
+      const req: updateSubGuestRequest = {
+        id: user.data?.id,
+        sub_guests: data,
+      };
+      const res = await updateGuestAPI.mutateAsync(req);
+      if (res) {
+        notifySucces();
+        loaderRef.current.complete();
+      }
+    } catch (error) {
+      notifyError();
+      loaderRef.current.complete();
+      console.error(error);
+    }
+  }, 1000);
+
+  const confirmReligious = useDebouncedCallback(async (state: boolean) => {
+    try {
+      if (!user.data) {
+        return;
+      }
+
+      loaderRef.current.continuousStart();
+      const res = await update.mutateAsync({
+        id: user.data.id,
+        updates: {
+          religious_confirmation: state,
+        },
+      });
+
+      if (res) {
+        notifySucces();
+        loaderRef.current.complete();
+      }
+    } catch (error) {
+      notifyError();
+
+      loaderRef.current.complete();
+      console.error(error);
+    }
+  }, 300);
+
+  const confirmCivil = useDebouncedCallback(async (state: boolean) => {
+    try {
+      if (!user.data) {
+        return;
+      }
+      if (update.isPending) {
+        return;
+      }
+      loaderRef.current.continuousStart();
+      const res = await update.mutateAsync({
+        id: user.data.id,
+        updates: {
+          civil_confirmation: state,
+        },
+      });
+
+      if (res) {
+        notifySucces();
+        loaderRef.current.complete();
+      }
+    } catch (error) {
+      notifyError();
+
+      loaderRef.current.complete();
+      console.error(error);
+    }
+  }, 300);
+
+  if (user.error || !user.data) {
+    return;
+  }
+  const forever =
+    ' por favor indícanos si podrás acompañarnos en este día tan especial.';
+  const noForever =
+    ' para poder confirmar tu asistencia es importante que nos indiques quienes de las siguientes personas registradas, asistirán.';
+
   return (
-    <StyledForm>
-      <Container>
-        <h1>CONFIRMACIÓN</h1>
+    <>
+      <LoadingBar color={colors.blue} ref={loaderRef} />
+      <Toaster />
 
-        <p>
-          ERES MUY IMPORTANTE PARA NOSOTROS, ESPERAMOS CONTAR CON TU COMPAÑÍA EN
-          ESTE DÍA TAN ESPECIAL
-        </p>
-        <p>
-          ¡Hola Yerim!, para poder confirmar tu asistencia es importante que nos
-          indiques quienes de las siguientes personas registradas, asistirán.
-        </p>
-        <p>
-          Recuerda que por seguridad, solo podrán asistir las personas que estén
-          registradas y confirmadas.
-        </p>
+      <StyledForm>
+        <Container>
+          <h1>CONFIRMACIÓN</h1>
 
-        <div className="names">
-          {names.map((n) => {
-            return <Name name={n} />;
-          })}
-        </div>
-
-        <div className="confirm-container">
-          <div className="confirm-item" style={{ marginBottom: '1rem' }}>
-            <h3>¿Asistirás a la ceremonia religiosa?</h3>
-            <div className="item-btns">
-              <button>
-                CONFIRMAR <br />
-                ASISTENCIA
-              </button>
-              <button>
-                NO PODRÉ <br />
-                ASISTIR
-              </button>
-            </div>
-          </div>
-          <div className="confirm-item">
-            <h3>¿Asistirás a la ceremonia civil?</h3>
-            <div className="item-btns">
-              <button>
-                CONFIRMAR <br />
-                ASISTENCIA
-              </button>
-              <button>
-                NO PODRÉ <br />
-                ASISTIR
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="copy">
           <p>
-            Nos gustaría contar con tu presencia en nuestra ceremonia religiosa.
-            Por favor, confirma tu asistencia antes del 15 de diciembre 2024. Si
-            no tenemos noticias tuyas, asumiremos que no podrás asistir.
-            <br />
-            <br />
-            {messages.both}
+            ERES MUY IMPORTANTE PARA NOSOTROS, ESPERAMOS CONTAR CON TU COMPAÑÍA
+            EN ESTE DÍA TAN ESPECIAL
           </p>
-        </div>
-      </Container>
-    </StyledForm>
+          <p>
+            ¡Hola {user.data?.attributes.name}!,{' '}
+            {user?.data?.attributes?.sub_guests?.data.length > 0
+              ? noForever
+              : forever}
+          </p>
+          {user?.data?.attributes?.sub_guests?.data.length > 0 ? (
+            <>
+              <p>
+                Recuerda que por seguridad, solo podrán asistir las personas que
+                estén registradas y confirmadas.
+              </p>
+
+              <div
+                className="names"
+                style={{
+                  justifyContent:
+                    user?.data?.attributes?.sub_guests.data.length > 3
+                      ? 'space-evenly'
+                      : 'center',
+                }}
+              >
+                {user.data?.attributes.sub_guests.data.map((subGuest, idx) => {
+                  return (
+                    <Name
+                      subGuest={subGuest}
+                      key={idx}
+                      user={user.data.id}
+                      onClick={updateSubGuest}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
+
+          <div className="confirm-container">
+            <div className="confirm-item" style={{ marginBottom: '1rem' }}>
+              <h3>¿Asistirás a la ceremonia religiosa?</h3>
+              <div className="item-btns">
+                <button
+                  onClick={() => confirmReligious(true)}
+                  disabled={!!user.data.attributes.religious_confirmation}
+                >
+                  CONFIRMAR <br />
+                  ASISTENCIA
+                </button>
+                <button
+                  onClick={() => confirmReligious(false)}
+                  disabled={!user.data.attributes.religious_confirmation}
+                >
+                  NO PODRÉ <br />
+                  ASISTIR
+                </button>
+              </div>
+            </div>
+            <div className="confirm-item">
+              <h3>¿Asistirás a la ceremonia civil?</h3>
+              <div className="item-btns">
+                <button
+                  onClick={() => confirmCivil(true)}
+                  disabled={!!user.data.attributes.civil_confirmation}
+                >
+                  CONFIRMAR <br />
+                  ASISTENCIA
+                </button>
+                <button
+                  onClick={() => confirmCivil(false)}
+                  disabled={!user.data.attributes.civil_confirmation}
+                >
+                  NO PODRÉ <br />
+                  ASISTIR
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="copy">
+            <p>
+              Nos gustaría contar con tu presencia en nuestra ceremonia
+              religiosa. Por favor, confirma tu asistencia antes del 15 de
+              diciembre 2024. Si no tenemos noticias tuyas, asumiremos que no
+              podrás asistir.
+              <br />
+              <br />
+            </p>
+          </div>
+        </Container>
+      </StyledForm>
+    </>
   );
 }
 
@@ -104,7 +242,7 @@ const StyledForm = styled.div`
 
   .names {
     display: flex;
-    justify-content: space-evenly;
+    // justify-content: space-evenly;
     flex-wrap: wrap;
   }
   .confirm-container {
@@ -140,6 +278,11 @@ const StyledForm = styled.div`
       border-radius: 10px;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.8em;
+      transition: opacity 0.2s ease-in-out;
+
+      &:disabled {
+        opacity: 0.4;
+      }
     }
   }
 `;

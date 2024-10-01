@@ -67,6 +67,11 @@ export default function Form() {
       }
 
       loaderRef.current.continuousStart();
+
+      if (!user.data.attributes.civil_confirmation && !state) {
+        cancelAll();
+      }
+
       const res = await update.mutateAsync({
         id: user.data.id,
         updates: {
@@ -95,6 +100,11 @@ export default function Form() {
         return;
       }
       loaderRef.current.continuousStart();
+
+      if (!user.data.attributes.religious_confirmation && !state) {
+        cancelAll();
+      }
+
       const res = await update.mutateAsync({
         id: user.data.id,
         updates: {
@@ -113,6 +123,31 @@ export default function Form() {
       console.error(error);
     }
   }, 300);
+
+  const cancelAll = () => {
+    try {
+      if (!user.data) {
+        return;
+      }
+      const subGuest = user.data.attributes.sub_guests.data;
+
+      const data = subGuest.map((sg) => ({
+        id: sg.id,
+        confirmation: false,
+      }));
+
+      const req: updateSubGuestRequest = {
+        id: user.data?.id,
+        sub_guests: data,
+      };
+
+      updateGuestAPI.mutate(req);
+    } catch (error) {
+      notifyError();
+
+      console.error(error);
+    }
+  };
 
   if (user.error || !user.data) {
     return;

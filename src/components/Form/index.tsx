@@ -212,14 +212,20 @@ export default function Form() {
               <div className="item-btns">
                 <button
                   onClick={() => confirmReligious(true)}
-                  disabled={!!user.data.attributes.religious_confirmation}
+                  disabled={
+                    user.data.attributes.religious_confirmation !== null &&
+                    !!user.data.attributes.religious_confirmation
+                  }
                 >
                   CONFIRMAR <br />
                   ASISTENCIA
                 </button>
                 <button
                   onClick={() => confirmReligious(false)}
-                  disabled={!user.data.attributes.religious_confirmation}
+                  disabled={
+                    user.data.attributes.religious_confirmation !== null &&
+                    !user.data.attributes.religious_confirmation
+                  }
                 >
                   NO PODRÉ <br />
                   ASISTIR
@@ -231,14 +237,20 @@ export default function Form() {
               <div className="item-btns">
                 <button
                   onClick={() => confirmCivil(true)}
-                  disabled={!!user.data.attributes.civil_confirmation}
+                  disabled={
+                    user.data.attributes.religious_confirmation !== null &&
+                    !!user.data.attributes.civil_confirmation
+                  }
                 >
                   CONFIRMAR <br />
                   ASISTENCIA
                 </button>
                 <button
                   onClick={() => confirmCivil(false)}
-                  disabled={!user.data.attributes.civil_confirmation}
+                  disabled={
+                    user.data.attributes.religious_confirmation !== null &&
+                    !user.data.attributes.civil_confirmation
+                  }
                 >
                   NO PODRÉ <br />
                   ASISTIR

@@ -52,6 +52,8 @@ const StyledGallery = styled.div`
     min-height: 100px;
     background-size: cover;
     background-position: center;
+
+    filter: grayscale(100%);
   }
 
   .span-2 {
@@ -189,6 +191,8 @@ const StyledFullImage = styled.div`
     max-height: 80%;
     border: 5px solid white;
     border-radius: 10px;
+
+    filter: grayscale(100%);
   }
 
   .close {

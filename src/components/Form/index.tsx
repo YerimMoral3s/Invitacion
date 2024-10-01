@@ -213,10 +213,8 @@ export default function Form() {
           </div>
           <div className="copy">
             <p>
-              Nos gustaría contar con tu presencia en nuestra ceremonia
-              religiosa. Por favor, confirma tu asistencia antes del 15 de
-              diciembre 2024. Si no tenemos noticias tuyas, asumiremos que no
-              podrás asistir.
+              Por favor, confirma tu asistencia antes del 15 de diciembre 2024.
+              Si no tenemos noticias tuyas, asumiremos que no podrás asistir.
               <br />
               <br />
             </p>

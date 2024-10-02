@@ -141,45 +141,21 @@ export default function Form() {
       user.data?.attributes || {};
 
     if (civil_confirmation === null || religious_confirmation === null)
-      return '';
+      return mensajes.pendiente;
 
     if (!civil_confirmation && religious_confirmation) {
-      return (
-        <>
-          <br />
-          <br />
-          {mensajes.confirmacion_solo_religiosa}
-        </>
-      );
+      return mensajes.confirmacion_solo_religiosa;
     }
 
     if (civil_confirmation && !religious_confirmation) {
-      return (
-        <>
-          <br />
-          <br />
-          {mensajes.confirmacion_solo_civil}
-        </>
-      );
+      return mensajes.confirmacion_solo_civil;
     }
 
     if (!civil_confirmation && !religious_confirmation) {
-      return (
-        <>
-          <br />
-          <br />
-          {mensajes.no_asistira}
-        </>
-      );
+      return mensajes.no_asistira;
     }
 
-    return (
-      <>
-        <br />
-        <br />
-        {mensajes.confirmacion_ambas}
-      </>
-    );
+    return mensajes.confirmacion_ambas;
   };
 
   if (!user.data || user.error) return null;
@@ -248,11 +224,7 @@ export default function Form() {
           </div>
 
           <div className="copy">
-            <p>
-              Por favor, confirma tu asistencia antes del 15 de diciembre 2024.
-              Si no tenemos noticias tuyas, asumiremos que no podrás asistir.{' '}
-              {getMessage()}
-            </p>
+            <p> {getMessage()}</p>
           </div>
         </Container>
       </StyledForm>
@@ -350,6 +322,8 @@ const noForeverAlone =
   ' para poder confirmar tu asistencia es importante que nos indiques quienes de las siguientes personas registradas, asistirán.';
 
 const mensajes = {
+  pendiente:
+    'Por favor, confirma tu asistencia antes del 15 de diciembre 2024. Si no tenemos noticias tuyas, asumiremos que no podrás asistir.',
   confirmacion_ambas:
     '¡Gracias por confirmar tu asistencia a ambas ceremonias! Estamos felices de que seas parte de estos momentos tan especiales. ¡Nos vemos pronto para celebrar juntos!',
   confirmacion_solo_civil:

@@ -25,7 +25,6 @@ export default function Name(props: {
   onClick: (subGuest: SubGuest) => void;
   disabled: boolean;
 }) {
-  console.log(props.disabled);
   return (
     <StyledName
       className={props.subGuest.attributes.confirmation ? 'confirmed' : ''}

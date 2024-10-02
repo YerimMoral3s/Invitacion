@@ -14,17 +14,23 @@ const StyledName = styled.button`
     background: ${colors.white};
     color: ${colors.gray};
   }
+  &:disabled {
+    opacity: 0.4;
+  }
 `;
 
 export default function Name(props: {
   subGuest: SubGuest;
   user: number;
   onClick: (subGuest: SubGuest) => void;
+  disabled: boolean;
 }) {
+  console.log(props.disabled);
   return (
     <StyledName
       className={props.subGuest.attributes.confirmation ? 'confirmed' : ''}
       onClick={() => props.onClick(props.subGuest)}
+      disabled={props.disabled}
     >
       {props.subGuest.attributes.name}
     </StyledName>

@@ -68,7 +68,12 @@ export default function Form() {
 
       loaderRef.current.continuousStart();
 
-      if (!user.data.attributes.civil_confirmation && !state) {
+      if (
+        user.data.attributes.religious_confirmation !== null &&
+        user.data.attributes.civil_confirmation !== null &&
+        !user.data.attributes.civil_confirmation &&
+        !state
+      ) {
         cancelAll();
       }
 
@@ -101,7 +106,12 @@ export default function Form() {
       }
       loaderRef.current.continuousStart();
 
-      if (!user.data.attributes.religious_confirmation && !state) {
+      if (
+        user.data.attributes.religious_confirmation !== null &&
+        user.data.attributes.civil_confirmation !== null &&
+        !user.data.attributes.religious_confirmation &&
+        !state
+      ) {
         cancelAll();
       }
 
@@ -152,10 +162,55 @@ export default function Form() {
   if (user.error || !user.data) {
     return;
   }
-  const forever =
+  const foreverAlone =
     ' por favor indícanos si podrás acompañarnos en este día tan especial.';
-  const noForever =
+  const noForeveAlone =
     ' para poder confirmar tu asistencia es importante que nos indiques quienes de las siguientes personas registradas, asistirán.';
+
+  const getMessage = () => {
+    const civil_confirmation = user.data.attributes.civil_confirmation;
+    const religious_confirmation = user.data.attributes.religious_confirmation;
+
+    if (civil_confirmation === null || religious_confirmation === null) {
+      return '';
+    }
+
+    if (!civil_confirmation && religious_confirmation) {
+      return (
+        <>
+          <br />
+          <br />
+          {mensajes.confirmacion_solo_religiosa}
+        </>
+      );
+    }
+    if (civil_confirmation && !religious_confirmation) {
+      return (
+        <>
+          <br />
+          <br />
+          {mensajes.confirmacion_solo_civil}
+        </>
+      );
+    }
+    if (!civil_confirmation && !religious_confirmation) {
+      return (
+        <>
+          <br />
+          <br />
+          {mensajes.no_asistira}
+        </>
+      );
+    }
+
+    return (
+      <>
+        <br />
+        <br />
+        {mensajes.confirmacion_ambas}
+      </>
+    );
+  };
 
   return (
     <>
@@ -173,8 +228,8 @@ export default function Form() {
           <p>
             ¡Hola {user.data?.attributes.name}!,{' '}
             {user?.data?.attributes?.sub_guests?.data.length > 0
-              ? noForever
-              : forever}
+              ? noForeveAlone
+              : foreverAlone}
           </p>
           {user?.data?.attributes?.sub_guests?.data.length > 0 ? (
             <>
@@ -195,6 +250,12 @@ export default function Form() {
                 {user.data?.attributes.sub_guests.data.map((subGuest, idx) => {
                   return (
                     <Name
+                      disabled={
+                        user.data.attributes.religious_confirmation !== null &&
+                        user.data.attributes.civil_confirmation !== null &&
+                        !user.data.attributes.civil_confirmation &&
+                        !user.data.attributes.religious_confirmation
+                      }
                       subGuest={subGuest}
                       key={idx}
                       user={user.data.id}
@@ -248,7 +309,7 @@ export default function Form() {
                 <button
                   onClick={() => confirmCivil(false)}
                   disabled={
-                    user.data.attributes.religious_confirmation !== null &&
+                    user.data.attributes.civil_confirmation !== null &&
                     !user.data.attributes.civil_confirmation
                   }
                 >
@@ -261,9 +322,8 @@ export default function Form() {
           <div className="copy">
             <p>
               Por favor, confirma tu asistencia antes del 15 de diciembre 2024.
-              Si no tenemos noticias tuyas, asumiremos que no podrás asistir.
-              <br />
-              <br />
+              Si no tenemos noticias tuyas, asumiremos que no podrás asistir.{' '}
+              {getMessage()}
             </p>
           </div>
         </Container>
@@ -331,3 +391,17 @@ const StyledForm = styled.div`
     }
   }
 `;
+
+const mensajes = {
+  confirmacion_ambas:
+    '¡Gracias por confirmar tu asistencia a ambas ceremonias! Estamos felices de que seas parte de estos momentos tan especiales. ¡Nos vemos pronto para celebrar juntos!',
+
+  confirmacion_solo_civil:
+    '¡Gracias por confirmar tu asistencia a nuestra ceremonia civil! Estamos emocionados de compartir este momento especial contigo.',
+
+  confirmacion_solo_religiosa:
+    '¡Gracias por confirmar tu asistencia a nuestra boda! Será maravilloso compartir esta bendición contigo.',
+
+  no_asistira:
+    'Lamentamos que no puedas acompañarnos, pero entendemos. Esperamos poder compartir momentos contigo en el futuro. ¡Gracias por hacernos saber!',
+};

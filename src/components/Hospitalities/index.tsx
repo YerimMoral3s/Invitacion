@@ -119,7 +119,7 @@ const Hosp = ({ hotel }: { hotel: HotelProps }) => (
         <a href={hotel.ubicacion} target="_blank">
           <button>UBICACIÓN</button>
         </a>
-        <a href={'tel:+' + hotel.ubicacion} target="_blank">
+        <a href={'tel:+' + hotel.telefono} target="_blank">
           <button>LLAMAR</button>
         </a>
       </div>

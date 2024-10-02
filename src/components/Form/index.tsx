@@ -286,6 +286,7 @@ const StyledForm = styled.div`
 
     p {
       border: 2px solid ${colors.gray};
+      margin: 0;
       padding: 1rem;
     }
   }

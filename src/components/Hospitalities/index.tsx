@@ -97,6 +97,8 @@ export default function Hospitalities() {
           No te preocupes por el transporte, ¡te tenemos una solución! Nos
           pondremos en contacto contigo.
         </p>
+        <p style={{ textAlign: 'center', marginTop: '1rem' }}>Hotel - Boda</p>
+        <p style={{ textAlign: 'center', marginTop: '1rem' }}>Boda - Hotel</p>
       </Container>
     </StyledHospitalities>
   );

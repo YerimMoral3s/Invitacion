@@ -174,7 +174,7 @@ export default function Form() {
             EN ESTE DÍA TAN ESPECIAL
           </p>
           <p>
-            ¡Hola {user.data.attributes.name}!,{' '}
+            ¡Hola {getFirstName(user.data.attributes.name)}!,{' '}
             {subGuests.length > 0 ? noForeverAlone : foreverAlone}
           </p>
 
@@ -334,3 +334,20 @@ const mensajes = {
   no_asistira:
     'Lamentamos que no puedas acompañarnos, pero entendemos. Esperamos poder compartir momentos contigo en el futuro. ¡Gracias por hacernos saber!',
 };
+
+function getFirstName(fullName: string): string {
+  // Dividir el string en palabras usando el espacio como delimitador
+  const words = fullName.split(' ');
+
+  // Tomar la primera palabra
+  const firstName = words[0];
+
+  // Convertir la primera letra en mayúscula y el resto en minúsculas
+  const formattedName =
+    firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+
+  return formattedName;
+}
+
+// Ejemplo de uso
+console.log(getFirstName('YERIM MORALES')); // "Yerim"

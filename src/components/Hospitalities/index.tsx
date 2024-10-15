@@ -94,11 +94,9 @@ export default function Hospitalities() {
           style={{ marginBottom: '2rem', textAlign: 'center' }}
         ></div>
         <p style={{ textAlign: 'center' }}>
-          No te preocupes por el transporte, ¡te tenemos una solución! Nos
-          pondremos en contacto contigo.
+          No te preocupes por el transporte Hotel-Boda-Hotel. ¡Te tenemos una
+          solución! Nos pondremos en contacto contigo.
         </p>
-        <p style={{ textAlign: 'center', marginTop: '1rem' }}>Hotel - Boda</p>
-        <p style={{ textAlign: 'center', marginTop: '1rem' }}>Boda - Hotel</p>
       </Container>
     </StyledHospitalities>
   );

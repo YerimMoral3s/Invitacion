@@ -46,7 +46,7 @@ export const Loader = (props: PropsWithChildren) => {
       document.body.style.overflow = 'hidden';
       setIsVisible(true);
     } else {
-      const miliseconds = 1000;
+      const miliseconds = 1500;
       const loaderElement = document.getElementById('loader-wed');
 
       if (loaderElement) {

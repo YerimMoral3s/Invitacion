@@ -348,6 +348,3 @@ function getFirstName(fullName: string): string {
 
   return formattedName;
 }
-
-// Ejemplo de uso
-console.log(getFirstName('YERIM MORALES')); // "Yerim"

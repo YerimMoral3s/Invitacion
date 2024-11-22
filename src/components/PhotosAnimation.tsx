@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../components/theme';
+import { colors } from './theme';
 // images for web (lowRes)
 import img1_web from '../assets/images-couple/web/irv-son-1-web.jpg';
 import img2_web from '../assets/images-couple/web/irv-son-2-web.jpg';
@@ -15,8 +15,8 @@ import img5_mobile from '../assets/images-couple/mobile/irv-son-5-mobile.jpg';
 import img6_mobile from '../assets/images-couple/mobile/irv-son-6-mobile.jpg';
 
 import { useEffect, useRef, useState } from 'react';
-import Logo from '../components/Logo';
-import { loaderStore } from '../components/Loader';
+import Logo from './Logo';
+import { loaderStore } from './Loader';
 
 const imagesArray = [
   { lowRes: img1_web, highRes: img1_web },

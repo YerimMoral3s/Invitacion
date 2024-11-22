@@ -19,7 +19,7 @@ export type User = {
     publishedAt: string;
     civil_confirmation: boolean | null;
     religious_confirmation: boolean | null;
-    seen: number | null;
+    seen: string | null;
     sub_guests: {
       data: SubGuest[];
     };

@@ -20,6 +20,7 @@ export type User = {
     civil_confirmation: boolean | null;
     religious_confirmation: boolean | null;
     seen: string | null;
+    blocked: boolean | null;
     sub_guests: {
       data: SubGuest[];
     };

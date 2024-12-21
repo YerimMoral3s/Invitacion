@@ -162,6 +162,10 @@ export default function Form() {
 
   const subGuests = user.data?.attributes.sub_guests?.data || [];
 
+  if (user.data?.attributes.blocked) {
+    return null;
+  }
+
   return (
     <>
       <LoadingBar color={colors.blue} ref={loaderRef} />

@@ -6,6 +6,7 @@ import { User } from './components/sdk/types';
 import { colors } from './components/theme';
 import { useRef, useState } from 'react';
 import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
+import Copy from './components/copy/copy';
 
 // Styled Components
 const Input = styled.input`
@@ -176,6 +177,10 @@ const Guest = ({ guest }: { guest: User }) => {
     loaderRef.current?.complete();
   };
 
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
     <>
       <LoadingBar color={colors.white} ref={loaderRef} />
@@ -188,6 +193,30 @@ const Guest = ({ guest }: { guest: User }) => {
               {guest.attributes.phone_number}
             </a>
           </h3>
+          <div
+            style={{
+              display: 'flex',
+            }}
+          >
+            <p>
+              Invitación:{' '}
+              <a
+                rel="stylesheet"
+                href={`https://irvin-sonia.wip-mx.com/?id=${guest.id}`}
+                target="_blank"
+              >
+                https://irvin-sonia.wip-mx.com/?id={guest.id}
+              </a>
+            </p>
+            <div
+              style={{ marginLeft: '10px' }}
+              onClick={() =>
+                handleCopy(`https://irvin-sonia.wip-mx.com/?id=${guest.id}`)
+              }
+            >
+              <Copy stroke="rgba(0,0,0, 0.8)" />
+            </div>
+          </div>
           <p>Última vista: {lastSeen}</p>
         </div>
 

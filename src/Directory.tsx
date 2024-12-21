@@ -71,6 +71,7 @@ type Boda =
   | 'religious_confirmation'
   | 'civil_confirmation'
   | 'ambas'
+  | 'bloqueados'
   | 'ninguna';
 
 // Main Directory Component
@@ -89,7 +90,8 @@ export default function Directory() {
     const query = search.toLowerCase();
 
     const matchesQuery = name.includes(query) || phone.includes(query);
-    const { civil_confirmation, religious_confirmation } = guest.attributes;
+    const { civil_confirmation, religious_confirmation, blocked } =
+      guest.attributes;
 
     switch (boda) {
       case 'null':
@@ -98,6 +100,8 @@ export default function Directory() {
         return matchesQuery && civil_confirmation && religious_confirmation;
       case 'ninguna':
         return matchesQuery && !civil_confirmation && !religious_confirmation;
+      case 'bloqueados':
+        return matchesQuery && blocked;
       default:
         return matchesQuery && guest.attributes[boda];
     }
@@ -131,6 +135,7 @@ export default function Directory() {
           <option value="religious_confirmation">Ceremonia Religiosa</option>
           <option value="ambas">Ambas</option>
           <option value="ninguna">Ninguna</option>
+          <option value="bloqueados">Bloqueados</option>
         </Select>
       </div>
 
@@ -188,6 +193,16 @@ const Guest = ({ guest }: { guest: User }) => {
 
         {/* Weddings */}
         <div className="weddings">
+          <div className="item">
+            <p>Bloqueado</p>
+            <input
+              type="checkbox"
+              checked={!!guest.attributes.blocked}
+              onChange={(e) =>
+                handleUpdate(e.target.checked, guest.id, 'user', 'blocked')
+              }
+            />
+          </div>
           <div className="item">
             <p>Boda Religiosa</p>
             <input
